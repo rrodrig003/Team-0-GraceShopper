@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import redux from './redux';
-import Router from './router';
+import Main from './components/Main.js';
 
-const { store } = redux;
+// STORE NOT CREATED YET
+import { store } from './redux';
 
 const appDiv = document.getElementById('app');
 
@@ -12,7 +12,7 @@ class HomePage extends Component {
   render() {
     return (
       <Provider store={store}>
-        <Router />
+        <Main />
       </Provider>
     );
   }
