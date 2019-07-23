@@ -1,9 +1,18 @@
 const User = require('./user');
 const connection = require('../connection');
 const Session = require('./session');
+const Orders = require('./Orders.js')
+const OrderedItems = require('./OrderedItems.js')
 
-Session.hasOne(User);
+// associations
+
 User.belongsTo(Session);
+Session.hasMany(User);
+
+Orders.hasMany(User)
+// Orders.belongsTo(User);
+
+
 
 /* 
 Associations:
@@ -17,5 +26,7 @@ Cart / Cart Items
 module.exports = {
   connection,
   User,
-  Session
+  Session,
+  Orders,
+  OrderedItems
 };
