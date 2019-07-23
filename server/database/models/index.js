@@ -1,6 +1,7 @@
-const User = require('./user');
-const connection = require('../connection');
-const Session = require('./session');
+const User = require("./user");
+const connection = require("../connection");
+const Session = require("./session");
+const Product = require("./products");
 
 Session.hasOne(User);
 User.belongsTo(Session);
@@ -17,5 +18,6 @@ Cart / Cart Items
 module.exports = {
   connection,
   User,
-  Session
+  Session,
+  Product
 };
