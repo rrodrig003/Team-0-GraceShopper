@@ -1,4 +1,3 @@
-
 const connection = require("../connection");
 const User = require("./user");
 const Products = require("./products");
@@ -8,35 +7,34 @@ const OrderedItems = require("./OrderedItems.js");
 const Cart = require("./cart.js");
 const CartItems = require("./cartItems.js");
 
-
 // associations
-Session.belongsTo(User)
+Session.belongsTo(User);
 User.hasMany(Session);
 // User.belongsTo(Session);
 
 //ORDER ASSOCIATIONS
-Orders.belongsTo(User)
+Orders.belongsTo(User);
 User.hasMany(Orders);
 
-OrderedItems.belongsTo(Orders)
-Orders.hasMany(OrderedItems)
+OrderedItems.belongsTo(Orders);
+Orders.hasMany(OrderedItems);
 
-OrderedItems.belongsTo(Products)
-Products.hasMany(OrderedItems)
+OrderedItems.belongsTo(Products);
+Products.hasMany(OrderedItems);
 
 //CART ASSOCIATIONS
-Cart.belongsTo(User)
+Cart.belongsTo(User);
 User.hasOne(Cart);
 
-Cart.belongsTo(Session)
+Cart.belongsTo(Session);
 Session.hasOne(Cart);
 
 //CARTITEMS ASSOCIATIONS
-CartItems.belongsTo(Products)
-Products.hasMany(CartItems)
+CartItems.belongsTo(Products);
+Products.hasMany(CartItems);
 
-CartItems.belongsTo(Cart)
-Cart.hasMany(CartItems)
+CartItems.belongsTo(Cart);
+Cart.hasMany(CartItems);
 /* 
 Associations:
 User/Orders 
@@ -47,16 +45,10 @@ Cart / Cart Items
 */
 
 module.exports = {
-<<<<<<< HEAD
   connection,
   User,
   Session,
-  Product
-=======
-	connection,
-	User,
-	Session,
-	Orders,
-	OrderedItems
->>>>>>> dev
+  Orders,
+  OrderedItems,
+  Products
 };
