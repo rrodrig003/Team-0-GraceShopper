@@ -1,20 +1,22 @@
 const Sequelize = require("sequelize");
-const db = require("../connection");
+const connection = require("../connection");
 
-const Product = db.define("product", {
+const Product = connection.define("product", {
   name: {
     type: Sequelize.STRING,
     allowNull: false
   },
   price: {
-    type: Sequelize.DECIMAL,
-    allowNull: false
+    type: Sequelize.DECIMAL(10, 2),
+    allowNull: false,
+    defaultValue: 1000
   },
   description: {
     type: Sequelize.TEXT
   },
   quantity: {
-    type: Sequelize.INTEGER
+    type: Sequelize.INTEGER,
+    defaultValue: 1
   },
   rating: {
     type: Sequelize.INTEGER
@@ -22,4 +24,3 @@ const Product = db.define("product", {
 });
 
 module.exports = Product;
-
