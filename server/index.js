@@ -8,7 +8,7 @@ const REFRESH_DB = process.env.FORCE_REFRESH === 'true' || false;
 
 const startServer = (app, connection) => {
   return connection
-    .sync({force: REFRESH_DB })
+    .sync({force: true })
     //.then(() => {
       //Seed  if true
     //})
