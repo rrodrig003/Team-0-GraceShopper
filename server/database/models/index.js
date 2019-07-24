@@ -50,5 +50,7 @@ module.exports = {
   Session,
   Orders,
   OrderedItems,
-  Products
+  Products,
+  Cart,
+  CartItems
 };
