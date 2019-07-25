@@ -1,12 +1,19 @@
-const { BOOLEAN, STRING } = require('sequelize');
+const { ENUM } = require('sequelize');
 const db = require('../connection.js');
 
 
 const Order = db.define('order', {
-  fulfilled: {
-    type:BOOLEAN,
-    defaultValue: false,
-  },
+  status: {
+    type: ENUM,
+    values: [
+      'Cart',
+      'Purchased', 
+      'Shipped', 
+      'Delivered',
+      'Returned',
+      ],
+    defaultValue: 'Cart'
+    },
 
 });
 

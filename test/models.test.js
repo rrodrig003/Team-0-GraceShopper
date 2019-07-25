@@ -167,27 +167,35 @@ describe('Test Models', () => {
 
   describe('Order', async () => {
 
-    it('has a user id and fulfillment status', async ()=> {
-      const order = await models.Order.create({userId: 1});
-      expect(order.userId).to.equal(1);
-      expect(order.fulfilled).to.equal(false);
+    it('has a sessionId and fulfillment status', async ()=> {
+      const order = await models.Order.create({status: 'Cart', sessionId: 1});
+      expect(order.sessionId).to.equal(1);
+      expect(order.status).to.equal('Cart');
+    });
+
+    it('has invoice statuses', async () => {
+      const order = await models.Order.create({
+        status: 'Purchased',
+        sessionId: 1
+      });
+      expect(order.status).to.equal('Purchased');
+      await order.update({status: 'Shipped'});
+      expect(order.status).to.equal('Shipped');
+      await order.update({status: 'Delivered'});
+      expect(order.status).to.equal('Delivered');
     });
   });
 
   describe('Order Item', async () => {
 
-    it('has a product id, user id, session id, and quantity fields', async () => {
+    it('has a product id, and quantity fields', async () => {
       const orderItem = await models.OrderItem.create({
         productId: 1,
         orderId: 1,
-        sessionId: 1
       });
 
       expect(orderItem.productId).to.equal(1);
       expect(orderItem.orderId).to.equal(1);
-      expect(orderItem.sessionId).to.equal(1);
     });
-
   });
-
 });

@@ -4,7 +4,7 @@ const path = require('path');
 
 if(process.env.NODE_ENV === 'development') {
   require('dotenv').config();
-}
+};
 
 const app = express();
 
