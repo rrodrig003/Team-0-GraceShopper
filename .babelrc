@@ -1,11 +1,3 @@
-// WORKIING ON THE FRONT END, BUT BREAKING TESTS
-
-// {
-//   "presets": ["@babel/env", "@babel/preset-react"],
-// }
-
-// WORKIING FOR TESTS, BUT BREAKING FRONT END
-
 {
   "presets": ["@babel/preset-env", "@babel/preset-react", ],
 }
