@@ -1,7 +1,7 @@
 const path = require('path')
 
 module.exports = {
-  entry: ['babel-polyfill', './client/index.js'],
+  entry: ["babel-polyfill", "./client/index.js"],
   output: {
     path: __dirname,
     filename: './server/public/bundle.js'
