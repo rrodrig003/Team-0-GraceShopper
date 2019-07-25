@@ -1,6 +1,6 @@
 import { combineReducers, createStore, applyMiddleware } from 'redux'
-import { logger } from 'redux-logger/src'
-import thunkMiddleware from 'redux-thunk/src';
+import { logger } from 'redux-logger'
+import thunkMiddleware from 'redux-thunk';
 import axios from 'axios'
 
 // ACTION CONSTANTS
