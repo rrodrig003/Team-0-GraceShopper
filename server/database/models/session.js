@@ -4,7 +4,10 @@ const connection = require('../connection');
 const Session = connection.define('session', {
   SID: {
     type: STRING,
-    allowNull: false
+    allowNull: false,
+    validate: {
+      notEmpty: true
+    }
   }
 });
 

@@ -1,5 +1,5 @@
 const connection = require('../connection');
-const { STRING, BOOLEAN } = require('sequelize');
+const { STRING, BOOLEAN, INTEGER } = require('sequelize');
 
 //TODO: SALT/HASH PW.
 
@@ -38,6 +38,22 @@ const User = connection.define('user', {
     validate: {
       isEmail: true
     }
+  },
+  //TODO: validation for location
+  country: {
+    type: STRING,
+  },
+  state: {
+    type: STRING,
+  },
+  city: {
+    type: STRING,
+  },
+  postalCode: {
+    type: INTEGER
+  },
+  street: {
+    type: STRING,
   },
   isAdmin: {
     type: BOOLEAN,

@@ -8,7 +8,7 @@ const REFRESH_DB = process.env.FORCE_REFRESH === 'true' || false;
 
 const startServer = (app, connection) => {
   return connection
-    .sync({force: true })
+    .sync({force: REFRESH_DB})
     //.then(() => {
       //Seed  if true
     //})
@@ -16,7 +16,7 @@ const startServer = (app, connection) => {
       return new Promise(res => {
         app.listen(PORT, () => {
           console.log('App listening on PORT', PORT);
-        })
+        });
         res();
       });
     })
