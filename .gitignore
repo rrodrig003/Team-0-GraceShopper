@@ -1,8 +1,6 @@
 node_modules
-
 server/public/bundle.js
-
-.vscode/settings.json
-
+server/public/bundle.js.map
+vscode
 .DS_Store  
-
+.env
