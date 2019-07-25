@@ -1,21 +1,24 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
+import { BrowserRouter as Router } from 'react-router-dom';
 import Main from './components/Main.js';
-
-// STORE NOT CREATED YET
-import { store } from './redux';
-
+import store from './components/redux/store.js';
 const appDiv = document.getElementById('app');
 
-class HomePage extends Component {
+class App extends Component {
   render() {
     return (
       <Provider store={store}>
-        <Main />
+        <Router>
+          <Main />
+        </Router>
       </Provider>
     );
   }
 }
 
-ReactDOM.render(<HomePage />, appDiv);
+ReactDOM.render(<App />, appDiv, () => console.log('DOM RENDERED'));
+
+export default App;
+

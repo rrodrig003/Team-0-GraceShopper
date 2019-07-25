@@ -18,7 +18,7 @@ describe("The `Product` model", () => {
     "This iphone charger will seamlessly charge your iphone in a very short amount of time. It has built in blue tooth that will know anyones socks off. Your friends and neighbors will be so impressed with your charger they will offer you free lemonade and a box off cookies. YOu can eat your cookies and lemonade in peace knowing your iphone will be fully charged the entire time. Cheers to you and your fully charged iphone mate!!";
 
   describe("attributes definition", () => {
-    it("includes `name`, `price`, `description`, `quantity and `rating` fields", async () => {
+    xit("includes `name`, `price`, `description`, `quantity and `rating` fields", async () => {
       const savedProduct = await Product.create({
         name: "Charger",
         price: 10,
@@ -32,7 +32,7 @@ describe("The `Product` model", () => {
       expect(savedProduct.rating).to.equal(4);
     });
 
-    it("requires `name`", async () => {
+    xit("requires `name`", async () => {
       product.name = null;
 
       let result, error;
@@ -56,7 +56,7 @@ describe("The `Product` model", () => {
       });
     });
 
-    it("The description field can handle long `content`", async () => {
+    xit("The description field can handle long `content`", async () => {
       const result = await Product.create({
         name: "Charger",
         price: 10,
