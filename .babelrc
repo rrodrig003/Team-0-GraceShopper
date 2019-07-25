@@ -1,18 +1,9 @@
-// WORKIING ON THE FRONT END, BUT BREAKING TESTS
-
-// {
-//   "presets": ["@babel/env", "@babel/preset-react"],
-// }
-
-// WORKIING FOR TESTS, BUT BREAKING FRONT END
-
 {
-  "presets": ["react",
-    ["env", {
-      "targets": {
-        "browsers": ["last 2 versions"]
-      }
-    }], 
-    "stage-0" 
-  ]
+  "presets": ["@babel/preset-env", "@babel/preset-react", ],
 }
+
+// @babel/preset-env is a smart preset that allows you to use the latest JavaScript without needing to micromanage 
+// which syntax transforms (and optionally, browser polyfills) are needed by your target environment(s).
+// This both makes your life easier and JavaScript bundles smaller!
+
+// @babel/preset-react includes the following plugins that allow for jsx parsing and transpilation
