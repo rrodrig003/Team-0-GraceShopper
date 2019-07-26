@@ -1,5 +1,4 @@
 const router = require("express").Router();
-
 const Product = require("../../server/database/models/product.js");
 
 // route to get all products from db
