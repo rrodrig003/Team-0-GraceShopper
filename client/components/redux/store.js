@@ -1,6 +1,6 @@
 import { combineReducers, createStore, applyMiddleware } from 'redux'
-import { logger } from 'redux-logger'
-import thunkMiddleware from 'redux-thunk';
+import { logger } from 'redux-logger/src'
+import thunkMiddleware from 'redux-thunk/src';
 import axios from 'axios'
 
 // ACTION CONSTANTS
@@ -31,7 +31,7 @@ const categoryState = {
 const productReducer = (state = productState, action) => {
   switch (action.type) {
     case GET_PRODUCTS:
-      return {...state, products: [...state.products, action.products]}
+      return {...state, products: [...state.products, ...action.products]}
     case GET_SINGLE_PRODUCT:
       // const singleProd = state.products.filter(elem => action.id === elem.id)
       return {...state, singleProduct: action.product}
@@ -43,7 +43,7 @@ const productReducer = (state = productState, action) => {
 const categoryReducer = (state = categoryState, action) => {
   switch (action.type) {
     case GET_CATEGORIES:
-      return {...state, categories: [...state.categories, action.categories]}
+      return {...state, categories: [...state.categories, ...action.categories]}
     case GET_SINGLE_CATEGORY:
       // const singleCat = state.categories.filter(elem => action.id === elem.id)
       return {...state, singleCategory: action.category}
@@ -57,14 +57,21 @@ const categoryReducer = (state = categoryState, action) => {
 export const fetchProducts = () => (dispatch) => {
   return axios.get('/api/products')
     .then(res => res.data)
-    .then(products => dispatch(getProducts(products)))
+    .then(products => {
+      console.log(products)
+      dispatch(getProducts(products))
+    })
     .catch(e => console.error('***ERROR IN fetchProducts:', e))
 }
 
 export const fetchCategories = () => (dispatch) => {
   return axios.get('/api/categories')
-    .then(res => res.data)
+    .then(res => {
+      console.log('@@@ CATEGORIES RES:', res)
+      return res.data
+    })
     .then(categories => {
+      // console.log(categories)
       dispatch(getCategories(categories))
     })
     .catch(e => console.error('***ERROR IN fetchCategories:', e))
