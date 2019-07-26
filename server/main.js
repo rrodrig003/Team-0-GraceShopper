@@ -1,12 +1,11 @@
-const cookieParser = require("cookie-parser");
-const express = require("express");
-const path = require("path");
-//const product = "./routes/product.js";
-const router = require("../server/routes/product.js");
+const cookieParser = require('cookie-parser');
+const express = require('express');
+const path = require('path');
 
-if (process.env.NODE_ENV === "development") {
-  require("dotenv").config();
-}
+if(process.env.NODE_ENV === 'development') {
+  require('dotenv').config();
+};
+
 
 const app = express();
 //the use of this router must come from routes

@@ -11,10 +11,10 @@ const Rating = require("./rating");
 // associations
 Session.belongsTo(User);
 User.hasMany(Session);
-Session.belongsToMany(Product, {through: OrderItem});
-Product.belongsToMany(Session, {through: OrderItem});
+Product.belongsToMany(Order, {through: OrderItem});
 OrderItem.belongsTo(Order);
-Order.belongsTo(User);
+Order.belongsTo(Session);
+Session.hasMany(Order);
 Order.hasMany(OrderItem);
 Product.belongsTo(Category);
 Category.hasOne(Product);
