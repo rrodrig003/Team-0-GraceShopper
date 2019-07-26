@@ -3,7 +3,7 @@ const User = require("./user");
 const Product = require("./product");
 const Category = require("./category");
 const Session = require("./session");
-const Order = require("./Order");
+const Order = require("./order");
 const OrderItem = require("./orderItem");
 const Rating = require("./rating");
 

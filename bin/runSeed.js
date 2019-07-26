@@ -24,14 +24,14 @@ const runMock = (instances, table)  => {
   };
 };
 
-for(let table of seedData) {
+for (let table of seedData) {
   let count = process.env[`SEED_${table.toUpperCase()}`];
   runMock(count, table)();
-};
+}
 
-for(let session = 0; session < process.env.SEED_SESSION; session++) {
+for (let session = 0; session < process.env.SEED_SESSION; session++) {
   createSession();
-};
+}
 
 const seedOrders = async() => {
   const idx = Math.floor(Math.random() * 5);
@@ -47,6 +47,6 @@ const seedOrders = async() => {
   });
 };
 
-for(let orders = 0; orders < process.env.SEED_ORDER; orders++) {
+for (let orders = 0; orders < process.env.SEED_ORDER; orders++) {
   seedOrders();
-};
+}

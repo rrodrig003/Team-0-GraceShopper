@@ -1,7 +1,7 @@
 const chai = require("chai");
 const expect = chai.expect;
 const db = require("../server/database/connection.js");
-const Product = require("../server/database/models/products.js");
+const Product = require("../server/database/models/product.js");
 
 describe("The `Product` model", () => {
   /**
