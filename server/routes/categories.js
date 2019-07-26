@@ -1,5 +1,5 @@
 const router = require('express').Router()
-const Category = require('../database/models/Category.js')
+const Category = require('../database/models/category.js')
 
 router.get('/', (req, res, next) => {
   Category.findAll()
@@ -23,4 +23,4 @@ router.get('/:id', (req, res, next) => {
     })
 })
 
-export default router;
+module.exports = router;
