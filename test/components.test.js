@@ -1,5 +1,5 @@
 import React from "react";
-import enzyme, { shallow, mount } from "enzyme";
+import enzyme, { mount } from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
 import { expect } from "chai";
 import "jsdom-global/register";
