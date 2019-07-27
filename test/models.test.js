@@ -60,7 +60,7 @@ describe('Test Models', () => {
     it('requires name and price', async () => {
       let product = mock.getMockProduct();
       delete product.price;
-      
+      let pass;
       try{
         await models.Product.create(product);
       } catch(e) {
@@ -125,13 +125,13 @@ describe('Test Models', () => {
     it('Has a max value of 5 and min value of 0', async () => {
       const failNegative = -5;
       const failExceed = 100;
-
+      let pass;
       try{
         await models.Rating.create({rating: failNegative});
       } catch(e) {
         pass = e;
       }
-
+      
       expect(pass).to.be.an.instanceOf(Error);
 
       try{
