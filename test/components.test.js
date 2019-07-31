@@ -1,5 +1,5 @@
 import React from "react";
-import enzyme, { mount } from "enzyme";
+import enzyme, { mount, shallow } from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
 import { expect } from "chai";
 import "jsdom-global/register";
@@ -20,10 +20,8 @@ const history = createMemoryHistory();
 describe("React componnents", () => {
 	let component;
 	describe("Main", () => {
-
 		it("should render correctly", () => {
-
-      component = mount(
+			component = mount(
 				<Provider store={store}>
 					<Router history={history}>
 						<Main />
@@ -37,7 +35,7 @@ describe("React componnents", () => {
 
 	describe("Home", () => {
 		it("should render correctly", () => {
-      component = mount(
+			component = mount(
 				<Provider store={store}>
 					<Router history={history}>
 						<Home />
@@ -50,8 +48,11 @@ describe("React componnents", () => {
 	});
 
 	describe("Products", () => {
-		it("should render correctly", () => {
-      component = mount(
+		let testStore;
+
+		beforeEach("Create <Products />", async () => {
+
+			component = await mount(
 				<Provider store={store}>
 					<Router history={history}>
 						<Products />
@@ -59,7 +60,12 @@ describe("React componnents", () => {
 				</Provider>
 			);
 
-			expect(component.find("div")).to.have.length(1);
+			testStore = await store.getState()
+		});
+
+		
+		it("renders elements based on what gets placed on the state", async () => {
+			await expect(component.find("button")).to.have.length(testStore.products.products.length);
 		});
 	});
 });

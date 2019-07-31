@@ -1,5 +1,6 @@
 const {STRING, DECIMAL, TEXT, INTEGER} = require("sequelize");
 const connection = require("../connection");
+const faker = require('faker')
 
 const Product = connection.define("product", {
   name: {
@@ -23,6 +24,13 @@ const Product = connection.define("product", {
     validate: {
       min: 0,
       max: Math.floor(Number.MAX_SAFE_INTEGER)
+    }
+  },
+  imageUrl: {
+    type: STRING,
+    defaultValue: faker.image.abstract(),
+    validate: {
+      isUrl: true,
     }
   },
 });

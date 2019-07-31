@@ -1,9 +1,16 @@
 import React, { Component } from 'react';
 import { Switch, Route } from 'react-router'
+import { Link } from "react-router-dom";
+import Navbar from './Navbar';
 import Home from './Home';
 import Products from './Products';
+import Login from './Login';
+import Cart from './Cart';
+import SingleProduct from './SingleProduct';
 import { connect } from 'react-redux';
-import { fetchProducts } from './redux/store'
+import { fetchProducts } from './redux/store';
+import '../stylesheets/index.scss'
+import '../stylesheets/header.scss'
 
 class Main extends Component {
 
@@ -13,12 +20,18 @@ class Main extends Component {
 
   render() {
     return (
-      <div>
-        {/* NAVBAR */}
-        <main>
+      <div className="main-container">
+        <header>
+          <h1><Link to="/">BAZAAR</Link></h1>
+          <Navbar />
+        </header>
+        <main >
           <Switch>
             <Route exact path="/" component={Home} />
             <Route exact path="/products" component={Products} />
+            <Route exact path="/login" component={Login} />
+            <Route exact path="/cart" component={Cart} />
+            <Route path="/products/:productId" component={SingleProduct} />
           </Switch>
         </main>
       </div>

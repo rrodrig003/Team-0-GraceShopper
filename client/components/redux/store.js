@@ -11,10 +11,10 @@ const GET_SINGLE_CATEGORY = 'GET_SINGLE_CATEGORY'
 
 // ACTION CREATORS
 const getProducts = (products) => ({type: GET_PRODUCTS, products})
-const getSingleProduct = (id) => ({type: GET_SINGLE_PRODUCT, id})
+const getSingleProduct = (product) => ({type: GET_SINGLE_PRODUCT, product})
 
 const getCategories = (categories) => ({type: GET_CATEGORIES, categories})
-const getSingleCategory = (id) => ({type: GET_SINGLE_CATEGORY, id})
+const getSingleCategory = (category) => ({type: GET_SINGLE_CATEGORY, category})
 
 // STATES
 const productState = {
@@ -54,8 +54,15 @@ const categoryReducer = (state = categoryState, action) => {
 
 // THUNKS
 
+const axios_instance = axios.create({
+  proxy: {
+    host: '127.0.0.1',
+    port: 3000,
+  },
+})
+
 export const fetchProducts = () => (dispatch) => {
-  return axios.get('/api/products')
+  return axios_instance.get('/api/products')
     .then(res => res.data)
     .then(products => {
       console.log(products)
@@ -65,7 +72,7 @@ export const fetchProducts = () => (dispatch) => {
 }
 
 export const fetchCategories = () => (dispatch) => {
-  return axios.get('/api/categories')
+  return axios_instance.get('/api/categories')
     .then(res => {
       console.log('@@@ CATEGORIES RES:', res)
       return res.data
@@ -78,16 +85,16 @@ export const fetchCategories = () => (dispatch) => {
 }
 
 export const fetchSingleProduct = (id) => (dispatch) => {
-  return axios.get(`/api/products/${id}`)
+  return axios_instance.get(`/api/products/${id}`)
     .then(res => res.data)
-    .then(( [product] ) => {
+    .then(product => {
       dispatch(getSingleProduct(product))
     })
     .catch(e => console.error('***ERROR IN fetchSingleProduct:', e))
 }
 
 export const fetchSingleCategory = (id) => (dispatch) => {
-  return axios.get(`/api/categories/${id}`)
+  return axios_instance.get(`/api/categories/${id}`)
     .then(res => res.data)
     .then(( [category] ) => {
       dispatch(getSingleCategory(category))

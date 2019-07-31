@@ -1,0 +1,39 @@
+@import "./index.scss";
+
+header {
+  display: block;
+  padding: 15px;
+
+  h1 {
+    text-align: center;
+    font-size:  4em;
+    
+  }
+
+  h1:hover {
+    text-shadow: 2px 2px 4px #000000;
+  }
+
+  ul {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    font-size:  2em;
+
+    li {
+      padding: 10px;
+      text-decoration: none;
+      list-style: none;
+      color: color(primary);
+      
+          &:hover {
+            text-shadow: 2px 2px 4px #000000;
+        }
+
+        .link {
+          color: color(primary);
+          outline: none;
+        }
+    }
+  }
+}
