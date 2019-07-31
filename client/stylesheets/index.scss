@@ -1,0 +1,17 @@
+@import url('https://fonts.googleapis.com/css?family=Bungee+Inline&display=swap');
+
+$colors: (
+  primary: rgb(253, 147, 135),
+  secondary: rgb(151, 174, 250),
+  accent: rgb(240, 240, 149),
+);
+
+@function color($color-name) {
+  @return map-get($colors, $color-name)
+};
+
+
+.main-container {
+  background-color: #fff;
+  font-family: 'Bungee Inline', cursive;
+}

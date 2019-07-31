@@ -1,0 +1,26 @@
+@import "./index.scss";
+
+.slider-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  max-width: 700px;
+  max-height: 200px;
+  margin-left: auto;
+  margin-right: auto;
+
+  .slides {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 500px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    text-align: center;
+
+    img {
+      vertical-align: middle;
+      width: 100%;
+    }
+  }
+}

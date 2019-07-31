@@ -6,7 +6,7 @@ class Category extends Component {
     const { categories } = this.props
     return (
       <div>
-        <div>PRODUCT CATEGORY MENU</div>
+        <div>PRODUCT CATEGORY MENU...</div>
         <ul>
           {
             categories.map(category => {

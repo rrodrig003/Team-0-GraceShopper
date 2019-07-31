@@ -5,7 +5,6 @@ import Category from './Category'
 const Home = () => {
   return (
     <div>
-      HOME!
       <ProductSlider />
       <Category />
     </div>
