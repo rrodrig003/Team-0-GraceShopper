@@ -12,7 +12,7 @@
     "start": "node server/index.js",
     "server": "nodemon --watch server -e js,html server/index.js",
     "build-dev": "webpack -w --mode=development",
-    "dev": "NODE_ENV=development npm run server & npm run build-dev"
+    "dev": "npm run server & npm run build-dev"
   },
   "keywords": [],
   "author": "",
