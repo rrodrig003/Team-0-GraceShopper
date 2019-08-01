@@ -37,7 +37,7 @@
     "redux-logger": "^3.0.6",
     "redux-thunk": "^2.3.0",
     "sequelize": "^6.0.0",
-    "faker": "^4.1.0",
+    "faker": "^4.1.0"
   },
   "devDependencies": {
     "@babel/core": "^7.5.5",
