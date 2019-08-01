@@ -35,7 +35,8 @@
     "redux-devtools-extension": "^2.13.8",
     "redux-logger": "^3.0.6",
     "redux-thunk": "^2.3.0",
-    "sequelize": "^6.0.0"
+    "sequelize": "^6.0.0",
+    "faker": "^4.1.0",
   },
   "devDependencies": {
     "@babel/core": "^7.5.5",
@@ -48,6 +49,12 @@
     "babel-preset-react": "^6.24.1",
     "babel-preset-stage-0": "^6.24.1",
     "babel-register": "^6.26.0",
+<<<<<<< HEAD
+=======
+    "css-loader": "^3.1.0",
+    "nodemon": "^1.19.1",
+    "mocha": "^6.2.0",
+>>>>>>> deplo v3
     "chai": "^4.2.0",
     "css-loader": "^3.1.0",
     "enzyme": "^3.10.0",
