@@ -31,6 +31,7 @@ class Main extends Component {
             <Route exact path="/login" component={Login} />
             <Route exact path="/cart" component={Cart} />
             <Route path="/products/:productId" component={SingleProduct} />
+            <Redirect to="/"></Redirect>
           </Switch>
         </main>
       </div>
