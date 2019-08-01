@@ -1,21 +1,20 @@
 import React, { Component } from 'react';
-import { Switch, Route } from 'react-router'
-import { Link } from "react-router-dom";
+import { Switch, Route } from 'react-router';
+import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
 import Navbar from './Navbar';
 import Home from './Home';
 import Products from './Products';
 import Login from './Login';
 import Cart from './Cart';
 import SingleProduct from './SingleProduct';
-import { connect } from 'react-redux';
 import { fetchProducts } from './redux/store';
-import '../stylesheets/index.scss'
-import '../stylesheets/header.scss'
+import '../stylesheets/index.scss';
+import '../stylesheets/header.scss';
 
 class Main extends Component {
-
   componentDidMount() {
-    this.props.getProducts()
+    this.props.getProducts();
   }
 
   render() {
@@ -25,7 +24,7 @@ class Main extends Component {
           <h1><Link to="/">BAZAAR</Link></h1>
           <Navbar />
         </header>
-        <main >
+        <main>
           <Switch>
             <Route exact path="/" component={Home} />
             <Route exact path="/products" component={Products} />
@@ -35,20 +34,18 @@ class Main extends Component {
           </Switch>
         </main>
       </div>
-    )
+    );
   }
 }
 
-const mapDispatchToProps = dispatch => {
-  return {
-    getProducts: function() {
-      dispatch(fetchProducts())
-    }
-  }
-}
+const mapDispatchToProps = dispatch => ({
+  getProducts() {
+    dispatch(fetchProducts());
+  },
+});
 
-const stateComponent = connect(null, mapDispatchToProps)
+const stateComponent = connect(null, mapDispatchToProps);
 
-const connectedMain = stateComponent(Main)
+const connectedMain = stateComponent(Main);
 
 export default connectedMain;

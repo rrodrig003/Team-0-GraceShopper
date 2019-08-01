@@ -1,39 +1,40 @@
-require('dotenv').config();
+const crypto = require('crypto');
+const config = require('./seedConfig');
 const mock = require('../test/utils');
 const models = require('../server/database/models');
-const crypto = require('crypto');
+
 const seedData = ['Product', 'User', 'Category'];
 
 const createSession = async () => {
   const session = await models.Session.create({
-    SID: crypto.randomBytes(16).toString('hex')
+    SID: crypto.randomBytes(16).toString('hex'),
   }).catch(e => console.error(e));
   return session;
 };
 
-const runMock = (instances, table)  => {
-  let getMockData = mock[`getMock${table}`];
-  let model = models[table];
-  return async () => {
+const runMock = (instances, table) => {
+  const getMockData = mock[`getMock${table}`];
+  const model = models[table];
+  return () => {
     let created = 0;
-    while(created < instances) {
-      let instance = getMockData();
-      created+=1;
-      await model.create(instance).catch(e => console.error(e));
+    while (created < instances) {
+      const instance = getMockData();
+      created += 1;
+      model.create(instance).catch(e => console.error(e));
     }
   };
 };
 
-for (let table of seedData) {
-  let count = process.env[`SEED_${table.toUpperCase()}`];
-  runMock(count, table)();
-}
+seedData.map((table) => {
+  const count = config[`SEED_${table.toUpperCase()}`];
+  return runMock(count, table)();
+});
 
-for (let session = 0; session < process.env.SEED_SESSION; session++) {
+for (let session = 0; session < config.SEED_SESSION; session += 1) {
   createSession();
 }
 
-const seedOrders = async() => {
+const seedOrders = async () => {
   const idx = Math.floor(Math.random() * 5);
   const product = await models.Product.create(mock.getMockProduct());
   const session = await createSession();
@@ -43,10 +44,10 @@ const seedOrders = async() => {
   });
   await models.OrderItem.create({
     productId: product.id,
-    orderId: order.id
+    orderId: order.id,
   });
 };
 
-for (let orders = 0; orders < process.env.SEED_ORDER; orders++) {
+for (let orders = 0; orders < config.SEED_ORDER; orders += 1) {
   seedOrders();
 }

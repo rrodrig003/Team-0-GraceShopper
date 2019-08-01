@@ -6,9 +6,9 @@ const Session = connection.define('session', {
     type: STRING,
     allowNull: false,
     validate: {
-      notEmpty: true
-    }
-  }
+      notEmpty: true,
+    },
+  },
 });
 
 module.exports = Session;

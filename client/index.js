@@ -4,6 +4,7 @@ import { Provider } from 'react-redux';
 import { BrowserRouter as Router } from 'react-router-dom';
 import Main from './components/Main.js';
 import store from './components/redux/store.js';
+
 const appDiv = document.getElementById('app');
 
 class App extends Component {
