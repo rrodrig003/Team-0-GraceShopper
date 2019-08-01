@@ -7,13 +7,13 @@ const Order = db.define('order', {
     type: ENUM,
     values: [
       'Cart',
-      'Purchased', 
-      'Shipped', 
+      'Purchased',
+      'Shipped',
       'Delivered',
       'Returned',
-      ],
-    defaultValue: 'Cart'
-    },
+    ],
+    defaultValue: 'Cart',
+  },
 
 });
 

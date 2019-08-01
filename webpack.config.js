@@ -1,10 +1,8 @@
-const path = require('path')
-
 module.exports = {
-  entry: ["babel-polyfill", "./client/index.js"],
+  entry: ['babel-polyfill', './client/index.js'],
   output: {
     path: __dirname,
-    filename: './server/public/bundle.js'
+    filename: './server/public/bundle.js',
   },
   mode: 'development',
   devtool: 'eval-source-map',
@@ -20,12 +18,12 @@ module.exports = {
         use: [
           'style-loader',
           'css-loader',
-          'sass-loader'
-        ]
-      }
+          'sass-loader',
+        ],
+      },
     ],
   },
   devServer: {
     historyApiFallback: true,
-  }
+  },
 };
