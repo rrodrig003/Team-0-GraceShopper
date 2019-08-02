@@ -1,5 +1,6 @@
 import React from 'react';
-import { connect } from 'react-redux';
+
+// TODO include prop types
 
 const Category = ({ categories }) => (
   <div>

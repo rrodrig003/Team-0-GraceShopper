@@ -10,8 +10,7 @@ import { createMemoryHistory } from 'history';
 import Main from '../client/components/Main';
 import Home from '../client/components/Home';
 import Products from '../client/components/Products';
-
-import store from '../client/components/redux/store.js';
+import store from '../client/store';
 
 
 enzyme.configure({ adapter: new Adapter() });
