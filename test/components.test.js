@@ -47,23 +47,20 @@ describe('React componnents', () => {
   });
 
   describe('Products', () => {
-    let testStore;
 
     beforeEach('Create <Products />', async () => {
       component = await mount(
         <Provider store={store}>
           <Router history={history}>
-            <Products />
+            <Products products={['product']} />
           </Router>
         </Provider>,
       );
-
-      testStore = await store.getState();
     });
 
 
     it('renders elements based on what gets placed on the state', async () => {
-      await expect(component.find('button')).to.have.length(testStore.products.products.length);
+      await expect(component.find('button')).to.have.length(1);
     });
   });
 });

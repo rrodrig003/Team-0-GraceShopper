@@ -7,7 +7,7 @@ import Home from './Home';
 import Products from '../containers/ProductsContainer';
 import Login from './Login';
 import Cart from './Cart';
-import SingleProduct from './SingleProduct';
+import SingleProduct from '../containers/SingleProductContainer';
 import { fetchProducts } from '../actions/productActions';
 import '../stylesheets/index.scss';
 import '../stylesheets/header.scss';
@@ -31,7 +31,7 @@ class Main extends Component {
             <Route exact path="/login" component={Login} />
             <Route exact path="/cart" component={Cart} />
             <Route path="/products/:productId" component={SingleProduct} />
-            <Redirect to="/"></Redirect>
+            <Redirect to="/" />
           </Switch>
         </main>
       </div>
