@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Switch, Route } from 'react-router';
+import { Switch, Route, Redirect } from 'react-router';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import Navbar from './Navbar';
@@ -31,6 +31,7 @@ class Main extends Component {
             <Route exact path="/login" component={Login} />
             <Route exact path="/cart" component={Cart} />
             <Route path="/products/:productId" component={SingleProduct} />
+            <Redirect to="/"></Redirect>
           </Switch>
         </main>
       </div>

@@ -30,69 +30,61 @@ const categoryState = {
 // REDUCERS
 const productReducer = (state = productState, action) => {
   switch (action.type) {
-  case GET_PRODUCTS:
-    return { ...state, products: [...state.products, ...action.products] };
-  case GET_SINGLE_PRODUCT:
-    // const singleProd = state.products.filter(elem => action.id === elem.id)
-    return { ...state, singleProduct: action.product };
-  default:
-    return state;
+    case GET_PRODUCTS:
+      return { ...state, products: [...state.products, ...action.products] };
+    case GET_SINGLE_PRODUCT:
+      return { ...state, singleProduct: action.product };
+    default:
+      return state;
   }
 };
 
 const categoryReducer = (state = categoryState, action) => {
   switch (action.type) {
-  case GET_CATEGORIES:
-    return { ...state, categories: [...state.categories, ...action.categories] };
-  case GET_SINGLE_CATEGORY:
-    // const singleCat = state.categories.filter(elem => action.id === elem.id)
-    return { ...state, singleCategory: action.category };
-  default:
-    return state;
+    case GET_CATEGORIES:
+      return { ...state, categories: [...state.categories, ...action.categories] };
+    case GET_SINGLE_CATEGORY:
+      return { ...state, singleCategory: action.category };
+    default:
+      return state;
   }
 };
 
-// THUNKS
+export const fetchSingleCategory = id => async (dispatch) => {
+  try {
+    const { data } = await axios.get(`/api/categories/${id}`);
+    dispatch(getSingleCategory(data));
+  } catch (e) {
+    console.error(e);
+  }
+};
 
-const axios_instance = axios.create({
-  proxy: {
-    host: '127.0.0.1',
-    port: 3000,
-  },
-});
+export const fetchSingleProduct = id => async (dispatch) => {
+  try {
+    const { data } = await axios.get(`/api/products/${id}`);
+    dispatch(getSingleProduct(data));
+  } catch (e) {
+    console.error(e);
+  }
+};
 
-export const fetchProducts = () => dispatch => axios_instance.get('/api/products')
-  .then(res => res.data)
-  .then((products) => {
-    console.log(products);
-    dispatch(getProducts(products));
-  })
-  .catch(e => console.error('***ERROR IN fetchProducts:', e));
+export const fetchProducts = () => async (dispatch) => {
+  try {
+    const { data } = await axios.get('/api/products');
+    dispatch(getProducts(data));
+  } catch (e) {
+    console.error(e);
+  }
+};
 
-export const fetchCategories = () => dispatch => axios_instance.get('/api/categories')
-  .then((res) => {
-    console.log('@@@ CATEGORIES RES:', res);
-    return res.data;
-  })
-  .then((categories) => {
-    // console.log(categories)
-    dispatch(getCategories(categories));
-  })
-  .catch(e => console.error('***ERROR IN fetchCategories:', e));
-
-export const fetchSingleProduct = id => dispatch => axios_instance.get(`/api/products/${id}`)
-  .then(res => res.data)
-  .then((product) => {
-    dispatch(getSingleProduct(product));
-  })
-  .catch(e => console.error('***ERROR IN fetchSingleProduct:', e));
-
-export const fetchSingleCategory = id => dispatch => axios_instance.get(`/api/categories/${id}`)
-  .then(res => res.data)
-  .then(([category]) => {
-    dispatch(getSingleCategory(category));
-  })
-  .catch(e => console.error('***ERROR IN fetchSingleCategory:', e));
+export const fetchCategories = () => async (dispatch) => {
+  try {
+    const { data } = await axios.get('/api/categories');
+    dispatch(getCategories(data));
+  } catch (e) {
+    console.error(e);
+  }
+};
 
 // CREATE STORE
 const rootReducer = combineReducers({
