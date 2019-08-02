@@ -17,7 +17,9 @@ const mapDispatchToProps = dispatch => ({
   getProducts() {
     dispatch(fetchProducts());
   },
-  sessionOnLoad,
+  onLoad() {
+    dispatch(sessionOnLoad());
+  },
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Container);

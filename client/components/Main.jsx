@@ -13,13 +13,13 @@ import '../stylesheets/header.scss';
 
 const propTypes = {
   getProducts: PropTypes.func.isRequired,
-  sessionOnLoad: PropTypes.func.isRequired,
+  onLoad: PropTypes.func.isRequired,
 };
 
 export default class Main extends Component {
   componentDidMount() {
-    const { getProducts, sessionOnLoad } = this.props;
-    sessionOnLoad();
+    const { getProducts, onLoad } = this.props;
+    onLoad();
     getProducts();
   }
 
