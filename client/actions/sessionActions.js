@@ -56,6 +56,7 @@ export const logoutUser = () => async (dispatch) => {
 export const sessionOnLoad = () => async (dispatch) => {
   try {
     const { data } = await axios.get('/api/auth/session');
+    console.log('Session Data', data);
     dispatch(getOrCreateSession(data));
     console.log('data', data);
     if (data.userId !== null) {

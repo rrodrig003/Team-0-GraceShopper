@@ -72,4 +72,13 @@ const User = connection.define('user', {
   },
 });
 
+User.validate = async (reqPw, user) => {
+  try {
+    const match = await bcrypt.compare(reqPw, user.password);
+    return match;
+  } catch (e) {
+    throw new Error(e);
+  }
+};
+
 module.exports = User;

@@ -23,7 +23,7 @@ router.post('/login', (req, res, next) => {
       else return user;
     })
     .then(async (user) => {
-      const match = await User.validatePassword(password, user);
+      const match = await User.validate(password, user);
       if (match === true) res.json(user);
       else {
         throw new Error('Invalid Password.');
