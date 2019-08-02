@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import '../stylesheets/products.scss';
-import { fetchSingleProduct } from './redux/store';
+import { fetchSingleProduct } from '../actions/productActions';
 import SingleProduct from './SingleProduct';
 
 class Products extends Component {

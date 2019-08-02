@@ -8,7 +8,7 @@ import Products from './Products';
 import Login from './Login';
 import Cart from './Cart';
 import SingleProduct from './SingleProduct';
-import { fetchProducts } from './redux/store';
+import { fetchProducts } from '../actions/productActions';
 import '../stylesheets/index.scss';
 import '../stylesheets/header.scss';
 
