@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
+import React from 'react';
 import ProductSlider from './ProductSlider';
-import Category from './Category';
+import Category from '../containers/CategoryContainer';
 
 const Home = () => (
   <div>
