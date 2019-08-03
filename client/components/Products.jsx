@@ -5,6 +5,7 @@ import '../stylesheets/products.scss';
 // TODO resolve linting errors
 // Include prop types
 
+
 const Products = ({ products, getSingleProd }) => (
   <div className="products-grid">
     {products.map(product => (

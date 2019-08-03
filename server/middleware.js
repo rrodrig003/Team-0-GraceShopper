@@ -12,6 +12,8 @@ const sessionMw = async (req, res, next) => {
       if (session.userId !== null) req.loggedIn = true;
       next();
     }
+  } else {
+    next();
   }
 };
 
