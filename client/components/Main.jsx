@@ -1,20 +1,21 @@
 import React, { Component } from 'react';
 import { Switch, Route, Redirect } from 'react-router';
 import { Link } from 'react-router-dom';
-import { connect } from 'react-redux';
-import Navbar from './Navbar';
+import Navbar from '../containers/NavbarContainer';
 import Home from './Home';
-import Products from './Products';
+import Products from '../containers/ProductsContainer';
 import Login from './Login';
 import Cart from './Cart';
-import SingleProduct from './SingleProduct';
-import { fetchProducts } from './redux/store';
+import SingleProduct from '../containers/SingleProductContainer';
 import '../stylesheets/index.scss';
 import '../stylesheets/header.scss';
 
-class Main extends Component {
+// TODO include prop types
+
+export default class Main extends Component {
   componentDidMount() {
-    this.props.getProducts();
+    const { getProducts } = this.props;
+    getProducts();
   }
 
   render() {
@@ -31,22 +32,10 @@ class Main extends Component {
             <Route exact path="/login" component={Login} />
             <Route exact path="/cart" component={Cart} />
             <Route path="/products/:productId" component={SingleProduct} />
-            <Redirect to="/"></Redirect>
+            <Redirect to="/" />
           </Switch>
         </main>
       </div>
     );
   }
 }
-
-const mapDispatchToProps = dispatch => ({
-  getProducts() {
-    dispatch(fetchProducts());
-  },
-});
-
-const stateComponent = connect(null, mapDispatchToProps);
-
-const connectedMain = stateComponent(Main);
-
-export default connectedMain;

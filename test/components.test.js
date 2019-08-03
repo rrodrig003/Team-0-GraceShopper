@@ -1,17 +1,16 @@
+/* eslint-disable react/jsx-filename-extension */
 import React from 'react';
-import enzyme, { mount, shallow } from 'enzyme';
+import enzyme, { mount } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import { expect } from 'chai';
 import 'jsdom-global/register';
-
 import { Provider } from 'react-redux';
 import { Router } from 'react-router-dom';
 import { createMemoryHistory } from 'history';
 import Main from '../client/components/Main';
 import Home from '../client/components/Home';
 import Products from '../client/components/Products';
-
-import store from '../client/components/redux/store.js';
+import store from '../client/store';
 
 
 enzyme.configure({ adapter: new Adapter() });
@@ -24,7 +23,7 @@ describe('React componnents', () => {
       component = mount(
         <Provider store={store}>
           <Router history={history}>
-            <Main />
+            <Main getProducts={() => {}} />
           </Router>
         </Provider>,
       );
@@ -48,23 +47,18 @@ describe('React componnents', () => {
   });
 
   describe('Products', () => {
-    let testStore;
-
     beforeEach('Create <Products />', async () => {
       component = await mount(
         <Provider store={store}>
           <Router history={history}>
-            <Products />
+            <Products products={['product']} />
           </Router>
         </Provider>,
       );
-
-      testStore = await store.getState();
     });
 
-
     it('renders elements based on what gets placed on the state', async () => {
-      await expect(component.find('button')).to.have.length(testStore.products.products.length);
+      await expect(component.find('button')).to.have.length(1);
     });
   });
 });
