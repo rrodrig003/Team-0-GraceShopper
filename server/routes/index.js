@@ -1,8 +1,7 @@
 const router = require('express').Router();
-const productRoutes = require('./product.js');
-const categories = require('./categories');
 
-router.use('/products', productRoutes);
-router.use('/categories', categories);
+router.use('/auth', require('./auth'));
+router.use('/products', require('./product'));
+router.use('/categories', require('./categories'));
 
 module.exports = router;

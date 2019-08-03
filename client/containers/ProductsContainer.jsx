@@ -8,7 +8,7 @@ const Container = props => <Products {...props} />;
 const mapStateToProps = (state) => {
   const { products } = state;
   return {
-    products,
+    products: products.allProducts,
   };
 };
 

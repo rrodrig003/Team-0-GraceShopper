@@ -1,20 +1,25 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { Switch, Route, Redirect } from 'react-router';
 import { Link } from 'react-router-dom';
 import Navbar from '../containers/NavbarContainer';
 import Home from './Home';
 import Products from '../containers/ProductsContainer';
-import Login from './Login';
+import Login from '../containers/AuthContainer';
 import Cart from './Cart';
 import SingleProduct from '../containers/SingleProductContainer';
 import '../stylesheets/index.scss';
 import '../stylesheets/header.scss';
 
-// TODO include prop types
+const propTypes = {
+  getProducts: PropTypes.func.isRequired,
+  onLoad: PropTypes.func.isRequired,
+};
 
 export default class Main extends Component {
   componentDidMount() {
-    const { getProducts } = this.props;
+    const { getProducts, onLoad } = this.props;
+    onLoad();
     getProducts();
   }
 
@@ -39,3 +44,5 @@ export default class Main extends Component {
     );
   }
 }
+
+Main.propTypes = propTypes;
