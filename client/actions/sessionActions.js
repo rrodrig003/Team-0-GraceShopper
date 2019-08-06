@@ -19,6 +19,15 @@ export const activeSession = () => ({ type: types.ACTIVE_SESSION });
 
 export const updateSession = session => ({ type: types.UPDATE_SESSION, session });
 
+export const registerUser = form => ({ type: types.REGISTER_USER, form });
+
+export const registerSuccess = () => ({ type: types.SUCCESSFUL_REGISTER });
+
+export const registerFailed = error => ({ type: types.FAILED_REGISTER, error });
+
+export const registrationInput = (field, value) => (
+  { type: types.REGISTRATION_INPUT, field, value });
+
 export const loginAttempt = history => async (dispatch, getState) => {
   const { authenticate } = getState();
   const { username, password, session } = authenticate;
@@ -66,5 +75,17 @@ export const sessionOnLoad = () => async (dispatch) => {
     }
   } catch (e) {
     console.error(e);
+  }
+};
+
+export const createUser = () => async (dispatch, getState) => {
+  const { authenticate } = getState();
+  const signUpFormData = authenticate.registration;
+  try {
+    await axios.post('/api/auth/register', signUpFormData);
+    dispatch(registerSuccess());
+  } catch (e) {
+    console.error(e);
+    dispatch(registerFailed(e.response.data.error));
   }
 };

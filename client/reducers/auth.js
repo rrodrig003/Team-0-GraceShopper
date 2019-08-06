@@ -1,6 +1,13 @@
+import { combineReducers } from 'redux';
 import * as types from '../actions/actionTypes';
+import registration from './registration';
 
 const initialAuth = {
+  showRegisterSuccess: false,
+  displayError: {
+    display: false,
+    error: '',
+  },
   signedIn: false,
   failedAttempt: false,
   session: {},
@@ -9,7 +16,7 @@ const initialAuth = {
   password: '',
 };
 
-const authenticate = (state = initialAuth, action) => {
+const auth = (state = initialAuth, action) => {
   switch (action.type) {
     case types.GET_OR_CREATE_SESSION:
       return {
@@ -50,9 +57,27 @@ const authenticate = (state = initialAuth, action) => {
         user: {},
         session: {},
       };
+    case types.SUCCESSFUL_REGISTER:
+      return {
+        ...state,
+        showRegisterSuccess: true,
+      };
+    case types.FAILED_REGISTER:
+      return {
+        ...state,
+        displayError: {
+          display: true,
+          error: action.error,
+        },
+      };
     default:
       return state;
   }
 };
+
+const authenticate = combineReducers({
+  auth,
+  registration,
+});
 
 export default authenticate;

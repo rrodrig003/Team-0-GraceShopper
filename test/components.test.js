@@ -23,7 +23,7 @@ describe('React componnents', () => {
       component = mount(
         <Provider store={store}>
           <Router history={history}>
-            <Main getProducts={() => {}} />
+            <Main getProducts={() => {}} onLoad={() => {}} />
           </Router>
         </Provider>,
       );

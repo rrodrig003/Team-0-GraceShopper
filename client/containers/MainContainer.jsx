@@ -9,7 +9,7 @@ const Container = props => <Main {...props} />;
 const mapStateToProps = (state) => {
   const { authenticate } = state;
   return {
-    authenticate,
+    authenticate: authenticate.auth,
   };
 };
 

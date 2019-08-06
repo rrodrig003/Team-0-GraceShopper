@@ -1,5 +1,5 @@
 /* eslint-disable max-len */
-const { STRING, BOOLEAN, INTEGER } = require('sequelize');
+const { STRING, BOOLEAN } = require('sequelize');
 const bcrypt = require('bcrypt');
 const connection = require('../connection');
 
@@ -50,7 +50,7 @@ const User = connection.define('user', {
     type: STRING,
   },
   postalCode: {
-    type: INTEGER,
+    type: STRING,
   },
   street: {
     type: STRING,
