@@ -5,7 +5,7 @@ const User = require('../database/models/user');
 
 module.exports = router;
 
-router.post('/login', (req, res, next) => {
+router.post('/login', (req, res) => {
   const { username, password } = req.body;
 
   if (!username || !password) {
@@ -19,19 +19,20 @@ router.post('/login', (req, res, next) => {
     },
   })
     .then((user) => {
-      if (!user) throw new Error('User not found.');
+      if (!user) throw new Error('Invalid Username/Password');
       else return user;
     })
     .then(async (user) => {
       const match = await User.validate(password, user);
       if (match === true) res.json(user);
       else {
-        throw new Error('Invalid Password.');
+        throw new Error('Invalid Username/Password');
       }
     })
     .catch((e) => {
-      console.error(e);
-      next(e);
+      res.status(400).send({
+        error: e.message,
+      });
     });
 });
 
@@ -51,9 +52,27 @@ router.post('/logout', (req, res) => {
 });
 
 router.get('/user/:id', (req, res, next) => {
-  User.findByPk(req.params.id)
-    .then(user => res.json(user))
-    .catch(next);
+  if (!parseInt(req.params.id, 10)) {
+    res.status(400).json({
+      error: 'Invalid Request',
+    });
+  } else {
+    User.findByPk(req.params.id)
+      .then((user) => {
+        if (user !== null) res.json(user);
+        else throw new Error('User not found');
+      })
+      .catch((e) => {
+        const { message } = e;
+        if (message === 'User not found') {
+          res.status(404).send({
+            error: message,
+          });
+        } else {
+          next(e);
+        }
+      });
+  }
 });
 
 router.get('/session', (req, res, next) => {
@@ -107,7 +126,6 @@ router.post('/register', (req, res) => {
   })
     .then(user => res.json(user))
     .catch((e) => {
-      console.error(e);
       res.status(400).send({
         error: e.errors,
       });
