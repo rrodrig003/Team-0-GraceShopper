@@ -59,18 +59,19 @@ router.get('/user/:userId', async (req, res, next) => {
 });
 
 // add to cart route
-router.post('/order/:orderId', async (req, res, next) => {
-  try {
-    // orderId, productId comes from req.body. quantity one by default
-    const orderId = parseInt(req.body.orderId, 10);
-    const productId = parseInt(req.body.productId, 10);
-    const quantity = parseInt(req.body.quantity, 10);
-    const cartItem = { orderId, productId, quantity };
-    const order = await OrderItem.Create(cartItem);
-    res.send(order);
-  } catch (e) {
-    next(e);
-  }
-});
+// unsure if this will work and how to test in postman so commenting out for now.
+// router.post('/add', async (req, res, next) => {
+//   try {
+//     // orderId, productId comes from req.body. quantity one by default
+//     const orderId = parseInt(req.body.orderId, 10);
+//     const productId = parseInt(req.body.productId, 10);
+//     const quantity = parseInt(req.body.quantity, 10);
+//     const cartItem = { orderId, productId, quantity };
+//     const order = await OrderItem.create(cartItem);
+//     res.send(order);
+//   } catch (e) {
+//     next(e);
+//   }
+// });
 
 module.exports = router;
