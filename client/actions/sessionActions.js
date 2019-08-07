@@ -30,7 +30,7 @@ export const registrationInput = (field, value) => (
 
 export const loginAttempt = history => async (dispatch, getState) => {
   const { authenticate } = getState();
-  const { username, password, session } = authenticate;
+  const { username, password, session } = authenticate.auth;
 
   try {
     const user = await axios.post('/api/auth/login', {
