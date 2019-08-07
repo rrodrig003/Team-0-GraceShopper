@@ -1,15 +1,12 @@
 const chai = require('chai');
-
-const { expect } = chai;
 const models = require('../server/database/models');
 const mock = require('./utils');
 
+const { expect } = chai;
+
+
 describe('Test Models', () => {
   before(() => models.connection.sync({ force: true }));
-
-  after(() => {
-    models.connection.close();
-  });
 
   describe('Session', () => {
     it('Able to create a session', async () => {
@@ -143,10 +140,6 @@ describe('Test Models', () => {
       expect(testInstance.username).to.equal(user.username);
       expect(testInstance.firstName).to.equal(user.firstName);
       expect(testInstance.lastName).to.equal(user.lastName);
-      expect(testInstance.country).to.equal(user.country);
-      expect(testInstance.usstate).to.equal(user.usstate);
-      expect(testInstance.postalCode).to.equal(user.postalCode);
-      expect(testInstance.street).to.equal(user.street);
       expect(testInstance.email).to.equal(user.email);
       expect(testInstance.isAdmin).to.equal(false);
     });

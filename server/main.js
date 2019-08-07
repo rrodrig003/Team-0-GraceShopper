@@ -22,7 +22,7 @@ app.get('*', (req, res) => {
 });
 
 app.use((err, req, res) => {
-  res.status(500).send(err || 'Internal Server Error');
+  res.status(500).send(err);
 });
 
 module.exports = app;

@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 const propTypes = {
   handleChange: PropTypes.func.isRequired,
   fields: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
     type: PropTypes.string.isRequired,
     value: PropTypes.string.isRequired,
@@ -18,6 +19,7 @@ const InputForm = ({ fields, handleChange }) => (
       <div key={field.name}>
         <label htmlFor={field.name}>{field.name}</label>
         <input
+          id={field.id}
           className="field-input"
           onChange={handleChange}
           name={field.name}

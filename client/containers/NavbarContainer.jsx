@@ -8,8 +8,8 @@ const Container = props => <Navbar {...props} />;
 const mapStateToProps = (state) => {
   const { authenticate } = state;
   return {
-    user: authenticate.user,
-    signedIn: authenticate.signedIn,
+    user: authenticate.auth.user,
+    signedIn: authenticate.auth.signedIn,
   };
 };
 

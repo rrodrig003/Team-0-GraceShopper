@@ -78,3 +78,38 @@ router.get('/session', (req, res, next) => {
       .catch(next);
   }
 });
+
+router.post('/register', (req, res) => {
+  const {
+    username,
+    password,
+    firstName,
+    lastName,
+    email,
+    country,
+    state,
+    city,
+    postalCode,
+    street,
+  } = req.body;
+
+  User.create({
+    username,
+    password,
+    firstName,
+    lastName,
+    email,
+    country,
+    state,
+    city,
+    postalCode,
+    street,
+  })
+    .then(user => res.json(user))
+    .catch((e) => {
+      console.error(e);
+      res.status(400).send({
+        error: e.errors,
+      });
+    });
+});
