@@ -65,7 +65,7 @@ router.post('/order/:orderId', async (req, res, next) => {
     const productId = parseInt(req.body.productId, 10);
     const quantity = parseInt(req.body.quantity, 10);
     const cartItem = { orderId, productId, quantity };
-    const order = await OrderItem.findOrCreate(cartItem);
+    const order = await OrderItem.Create(cartItem);
     res.send(order);
   } catch (e) {
     next(e);
