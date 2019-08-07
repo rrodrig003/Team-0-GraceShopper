@@ -43,6 +43,7 @@ router.get('/user/:userId', async (req, res, next) => {
     const order = await Order.findOne({
       where: {
         userId: req.params.userId,
+        status: 'Cart',
       },
     });
 
