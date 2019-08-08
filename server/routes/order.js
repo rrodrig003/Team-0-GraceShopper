@@ -10,5 +10,11 @@ router.post('/create', (req, res) => {
       status: 'Cart',
       sessionId,
     },
-  });
+  })
+    .then(([order]) => res.status(201).json(order))
+    .catch(() => {
+      res.status(500).send({
+        error: 'Invalid Request',
+      });
+    });
 });
