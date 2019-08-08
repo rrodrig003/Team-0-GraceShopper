@@ -16,3 +16,9 @@ test:
 
 before_script:
   - psql -c "create database gshopper;" -U postgres
+
+jobs:
+  include:
+    - stage: test
+    script: npm test
+    script: npm run lint
