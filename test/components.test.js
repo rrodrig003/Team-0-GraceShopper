@@ -51,7 +51,7 @@ describe('React componnents', () => {
       component = await mount(
         <Provider store={store}>
           <Router history={history}>
-            <Products products={['product']} />
+            <Products products={['product']} getSingleProd={() => {}} />
           </Router>
         </Provider>,
       );
