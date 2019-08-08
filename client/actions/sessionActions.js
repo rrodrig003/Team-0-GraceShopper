@@ -43,7 +43,6 @@ export const loginAttempt = history => async (dispatch, getState) => {
       sessionId: session.id,
     });
     dispatch(updateSession(sessionUser.data));
-    console.log('updated session with user id', sessionUser.data);
     history.push('/');
   } catch (e) {
     console.error(e);
@@ -65,9 +64,8 @@ export const logoutUser = () => async (dispatch) => {
 export const sessionOnLoad = () => async (dispatch) => {
   try {
     const { data } = await axios.get('/api/auth/session');
-    console.log('Session Data', data);
     dispatch(getOrCreateSession(data));
-    console.log('data', data);
+    await axios.post('/api/order/create', { sessionId: data.id });
     if (data.userId !== null) {
       dispatch(activeSession());
       const user = await axios.get(`/api/auth/user/${data.userId}`);
