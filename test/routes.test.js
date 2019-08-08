@@ -4,7 +4,7 @@ const app = require('../server/main.js');
 const { getMockUser, getMockProduct } = require('./utils');
 const db = require('../server/database/connection');
 const {
-  User, Order, Product, OrderItem,
+  User, Order, Product, OrderItem, Session,
 } = require('../server/database/models');
 
 const agent = request.agent(app);
