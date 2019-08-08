@@ -1,4 +1,11 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+
+const propTypes = {
+  categories: PropTypes.arrayOf(PropTypes.shape({
+
+  })).isRequired,
+};
 
 // TODO include prop types
 
@@ -14,5 +21,7 @@ const Category = ({ categories }) => (
     </ul>
   </div>
 );
+
+Category.propTypes = propTypes;
 
 export default Category;

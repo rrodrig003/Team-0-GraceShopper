@@ -8,7 +8,7 @@ const seedData = ['Product', 'User', 'Category'];
 const createSession = async () => {
   const session = await models.Session.create({
     SID: crypto.randomBytes(16).toString('hex'),
-  }).catch(e => console.error(e));
+  });
   return session;
 };
 
@@ -20,7 +20,7 @@ const runMock = (instances, table) => {
     while (created < instances) {
       const instance = getMockData();
       created += 1;
-      model.create(instance).catch(e => console.error(e));
+      model.create(instance);
     }
   };
 };

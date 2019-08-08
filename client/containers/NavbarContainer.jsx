@@ -16,7 +16,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = dispatch => ({
   async handleLogout(e) {
     e.preventDefault();
-    await dispatch(logoutUser()).catch(err => console.error(err));
+    await dispatch(logoutUser());
     dispatch(sessionOnLoad());
   },
 });
