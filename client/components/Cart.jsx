@@ -3,18 +3,18 @@ import PropTypes from 'prop-types';
 
 const propTypes = {
   cartItems: PropTypes.arrayOf(PropTypes.shape({
-    quantity: PropTypes.number,
-    orderId: PropTypes.number,
-    productId: PropTypes.number,
+    quantity: PropTypes.number.isRequired,
+    orderId: PropTypes.number.isRequired,
+    productId: PropTypes.number.isRequired,
   })).isRequired,
   products: PropTypes.arrayOf(PropTypes.shape({
-    productId: PropTypes.number,
-    name: PropTypes.number,
-    price: PropTypes.number,
-    description: PropTypes.string,
-    stock: PropTypes.number,
-    imageUrl: PropTypes.string,
-    categoryId: PropTypes.number,
+    productId: PropTypes.number.isRequired,
+    name: PropTypes.number.isRequired,
+    price: PropTypes.number.isRequired,
+    description: PropTypes.string.isRequired,
+    stock: PropTypes.number.isRequired,
+    imageUrl: PropTypes.string.isRequired,
+    categoryId: PropTypes.number.isRequired,
   })).isRequired,
   signedIn: PropTypes.bool.isRequired,
   userId: PropTypes.number.isRequired,
