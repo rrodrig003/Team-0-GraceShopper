@@ -121,5 +121,12 @@ describe('Routes', () => {
       expect(res.body.status).to.equal('Cart');
       expect(res.body.sessionId).to.equal(1);
     });
+
+    it('/order should return 400 if invalid request', async () => {
+      await agent
+        .post('/api/order/create')
+        .send({ status: 'Cart' })
+        .expect(400);
+    });
   });
 });

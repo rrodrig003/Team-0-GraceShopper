@@ -15,7 +15,7 @@ const Navbar = ({ signedIn, handleLogout }) => (
       <li className="nav-link"><Link className="link" to="/cart">Cart</Link></li>
 
       {
-        signedIn ? (<li className="nav-link"><Link className="link" to="/" onClick={handleLogout}>Logout</Link></li>) 
+        signedIn ? (<li className="nav-link"><Link className="link" to="/" onClick={handleLogout}>Logout</Link></li>)
           : (<li className="nav-link"><Link className="link" to="/login">Login</Link></li>)
       }
     </ul>

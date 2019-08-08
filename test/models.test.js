@@ -87,13 +87,13 @@ describe('Test Models', () => {
       try {
         testProduct = await models.Product.create(product);
       } catch (e) {
-        console.error('Failed to create a product', e);
+        throw new Error(e);
       }
 
       try {
         testCategory = await models.Category.create(category);
       } catch (e) {
-        console.error('Failed to create category', e);
+        throw new Error(e);
       }
 
       testProduct.setCategory(testCategory.id);

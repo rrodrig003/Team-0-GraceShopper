@@ -45,7 +45,6 @@ export const loginAttempt = history => async (dispatch, getState) => {
     dispatch(updateSession(sessionUser.data));
     history.push('/');
   } catch (e) {
-    console.error(e);
     dispatch(loginFailed());
     dispatch(inputUsername(''));
     dispatch(inputPassword(''));
@@ -57,7 +56,7 @@ export const logoutUser = () => async (dispatch) => {
     await axios.post('/api/auth/logout');
     dispatch(logout());
   } catch (e) {
-    console.error(e);
+    throw new Error(e);
   }
 };
 
