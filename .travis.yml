@@ -1,0 +1,26 @@
+language: node_js
+node_js:
+  - "10.13"
+
+before_install:
+  - npm i -g npm@6.4.1
+
+cache: npm
+
+services:
+  - postgresql
+
+test:
+  adapter: postgresql
+  database: gshopper
+
+before_script:
+  - psql -c "create database gshopper;" -U postgres
+
+jobs:
+  include:
+  - stage: test
+    name: "Run component, model and route tests"
+    script: npm test
+  - script: npm run lint
+    name: "run ESLint"
