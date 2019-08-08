@@ -99,4 +99,17 @@ describe('Routes', () => {
       expect(res.body).to.have.length(1);
     });
   });
+
+  describe('Order', () => {
+    it('/order will create an order for every new session', async () => {
+      const session = await Session.create({ SID: 'testOrder' });
+      const res = await agent
+        .post('/api/order/create')
+        .send({ sessionId: session.id, status: 'Cart' })
+        .expect(201);
+
+      expect(res.body.status).to.equal('Cart');
+      expect(res.body.sessionId).to.equal(session.id);
+    });
+  });
 });
