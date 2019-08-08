@@ -9,6 +9,6 @@ const cart = (state = cartState, action) => {
     default:
       return state;
   }
-}
+};
 
 export default cart;
