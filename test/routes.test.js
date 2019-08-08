@@ -99,4 +99,34 @@ describe('Routes', () => {
       expect(res.body).to.have.length(1);
     });
   });
+
+  describe('Order', () => {
+    it('/order will create an order for every new session', async () => {
+      const session = await Session.create({ SID: 'testOrder' });
+      const res = await agent
+        .post('/api/order/create')
+        .send({ sessionId: session.id, status: 'Cart' })
+        .expect(201);
+
+      expect(res.body.status).to.equal('Cart');
+      expect(res.body.sessionId).to.equal(session.id);
+    });
+
+    it('/order will not create a new order if session exists', async () => {
+      const res = await agent
+        .post('/api/order/create')
+        .send({ sessionId: 1, status: 'Cart' })
+        .expect(200);
+
+      expect(res.body.status).to.equal('Cart');
+      expect(res.body.sessionId).to.equal(1);
+    });
+
+    it('/order should return 400 if invalid request', async () => {
+      await agent
+        .post('/api/order/create')
+        .send({ status: 'Cart' })
+        .expect(400);
+    });
+  });
 });
