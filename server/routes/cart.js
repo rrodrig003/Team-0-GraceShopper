@@ -3,14 +3,12 @@ const Order = require('../database/models/order.js');
 const OrderItem = require('../database/models/orderItem.js');
 
 router.get('/session/:sessionId', async (req, res, next) => {
-  console.log('req params', req.params.sessionId);
   try {
     const order = await Order.findOne({
       where: {
         sessionId: req.params.sessionId,
       },
     });
-    console.log('order', order);
     const orders = await OrderItem.findAll({
       where: {
         orderId: order.id,
