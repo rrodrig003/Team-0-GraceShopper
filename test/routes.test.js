@@ -1,9 +1,11 @@
 const request = require('supertest');
 const chai = require('chai');
 const app = require('../server/main.js');
-const { getMockUser } = require('./utils');
+const { getMockUser, getMockProduct } = require('./utils');
 const db = require('../server/database/connection');
-const { User } = require('../server/database/models');
+const {
+  User, Order, Product, OrderItem, Session,
+} = require('../server/database/models');
 
 const agent = request.agent(app);
 const { expect } = chai;
@@ -79,6 +81,22 @@ describe('Routes', () => {
         expect(res.body.SID).to.not.equal(null);
         expect(res.body.userId).to.equal(null);
       });
+    });
+  });
+
+  describe('Cart', () => {
+    it('/cart can get order items by order id', async () => {
+      await Product.create(getMockProduct());
+      await Session.create({ SID: 'test' });
+      await Order.create({ sessionId: 1, userId: 1 });
+      await OrderItem.create({ productId: 1, orderId: 1 });
+
+      const res = await agent
+        .get('/api/cart/session/1')
+        .expect('Content-Type', /json/)
+        .expect(200);
+
+      expect(res.body).to.have.length(1);
     });
   });
 });
