@@ -8,6 +8,7 @@ import '../stylesheets/products.scss';
 const propTypes = {
   products: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.number.isRequired,
+    categoryId: PropTypes.number,
     name: PropTypes.string.isRequired,
     description: PropTypes.string,
     imageUrl: PropTypes.string,
@@ -32,7 +33,7 @@ const Products = ({ products, getSingleProd }) => (
         >
           <img
             src={product.imageUrl}
-            alt={product.description}
+            alt={product.name}
           />
           <div className="product-name">{product.name}</div>
           <div>{product.price}</div>
