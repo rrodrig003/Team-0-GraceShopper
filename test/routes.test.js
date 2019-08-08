@@ -111,5 +111,15 @@ describe('Routes', () => {
       expect(res.body.status).to.equal('Cart');
       expect(res.body.sessionId).to.equal(session.id);
     });
+
+    it('/order will not create a new order if session exists', async () => {
+      const res = await agent
+        .post('/api/order/create')
+        .send({ sessionId: 1, status: 'Cart' })
+        .expect(200);
+
+      expect(res.body.status).to.equal('Cart');
+      expect(res.body.sessionId).to.equal(1);
+    });
   });
 });
