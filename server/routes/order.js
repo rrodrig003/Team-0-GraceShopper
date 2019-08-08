@@ -1,3 +1,5 @@
+/* eslint no-underscore-dangle: ["error", { "allow": ["_options"] }] */
+
 const router = require('express').Router();
 const Order = require('../database/models/order');
 
@@ -11,7 +13,12 @@ router.post('/create', (req, res) => {
       sessionId,
     },
   })
-    .then(([order]) => res.status(201).json(order))
+    .then(([order]) => {
+      const newRecord = order._options.isNewRecord;
+      if (newRecord) res.status(201).json(order);
+      else if (!newRecord) res.status(200).json(order);
+      else throw new Error();
+    })
     .catch(() => {
       res.status(500).send({
         error: 'Invalid Request',
