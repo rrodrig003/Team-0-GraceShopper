@@ -20,6 +20,7 @@ before_script:
 jobs:
   include:
   - stage: test
-    name: "Run component, model and route tests, linting"
+    name: "Run component, model and route tests"
     script: npm test
   - script: npm run lint
+    name: "run ESLint"
