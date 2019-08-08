@@ -6,9 +6,9 @@
   "scripts": {
     "heroku-prebuild": "npm install --dev",
     "heroku-postbuild": "webpack --mode=production",
-    "lint": "eslint --ignore-path .gitignore .",
-    "test": "mocha ./test/*.test.js --watch --require ignore-styles --require babel-polyfill --require @babel/register",
-    "test-ci": "mocha ./test/*.test.js --require ignore-styles --require babel-polyfill --require @babel/register --exit",
+    "lint": "eslint --ignore-path .gitignore . --ext .jsx & eslint --ignore-path .gitignore .",
+    "test:dev": "mocha ./test/*.test.js --watch --require ignore-styles --require babel-polyfill --require @babel/register",
+    "test": "mocha ./test/*.test.js --require ignore-styles --require babel-polyfill --require @babel/register --exit",
     "start": "node server/index.js",
     "server": "nodemon --watch server -e js,html server/index.js",
     "build-dev": "webpack -w --mode=development",
