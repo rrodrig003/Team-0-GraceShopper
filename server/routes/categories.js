@@ -2,7 +2,7 @@ const router = require('express').Router();
 const Category = require('../database/models/category.js');
 
 router.get('/', (req, res, next) => {
-  Category.findAll()
+  Category.findAll({ attributes: ['id', 'name', 'description'] })
     .then((categories) => {
       res.json(categories);
     })
@@ -15,7 +15,7 @@ router.get('/', (req, res, next) => {
 router.get('/:id', (req, res, next) => {
   Category.findByPk(req.params.id)
     .then((category) => {
-      res.json(category);
+      res.json({ id: category.id, name: category.name, description: category.description });
     })
     .catch((e) => {
       console.error(e);

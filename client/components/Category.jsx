@@ -3,7 +3,9 @@ import PropTypes from 'prop-types';
 
 const propTypes = {
   categories: PropTypes.arrayOf(PropTypes.shape({
-
+    id: PropTypes.number.isRequired,
+    name: PropTypes.string.isRequired,
+    description: PropTypes.string.isRequired,
   })).isRequired,
 };
 
