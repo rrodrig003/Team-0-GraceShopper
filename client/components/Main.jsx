@@ -14,13 +14,25 @@ import '../stylesheets/header.scss';
 const propTypes = {
   getProducts: PropTypes.func.isRequired,
   onLoad: PropTypes.func.isRequired,
+  getCartByUser: PropTypes.func.isRequired,
+  getCartBySession: PropTypes.func.isRequired,
+  signedIn: PropTypes.bool.isRequired,
+  // eslint-disable-next-line react/require-default-props
+  userId: PropTypes.number,
+  sessionId: PropTypes.number.isRequired,
 };
 
 export default class Main extends Component {
   componentDidMount() {
-    const { getProducts, onLoad } = this.props;
-    onLoad();
-    getProducts();
+    const { getProducts, onLoad, getCartByUser, getCartBySession, signedIn, userId, sessionId } = this.props;
+
+    if (onLoad() && getProducts()) {
+      if (signedIn) {
+        getCartByUser(userId);
+      } else {
+        getCartBySession(sessionId);
+      }
+    }
   }
 
   render() {
