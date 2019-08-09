@@ -1,11 +1,12 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import Cart from '../components/Cart';
+import { getCartProducts } from '../selector';
 import { updateCartItem, removeItemFromCart } from '../actions/cartActions';
 
 const Container = props => <Cart {...props} />;
 
-const mapStateToProps = state => ({ cart: state.cart.cartProducts });
+const mapStateToProps = state => ({ cart: getCartProducts(state) });
 
 const mapDispatchToProps = dispatch => ({
   handleUpdate(cartItem, updateType) {

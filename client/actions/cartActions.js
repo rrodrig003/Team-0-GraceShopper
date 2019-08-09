@@ -48,25 +48,3 @@ export const updateCartItem = (cartItem, updateType) => async (dispatch) => {
     console.error(e);
   }
 };
-
-export const getCartProducts = products => (dispatch, getState) => {
-  const { cart } = getState();
-  const { orderItems } = cart;
-  const cartProducts = (cartOrderItems) => {
-    const details = cartOrderItems.map((orderItem) => {
-      const item = products.find(product => product.id === orderItem.productId);
-      item.quantity = orderItem.quantity;
-      item.price = parseFloat(item.price);
-      item.orderId = orderItem.orderId;
-      item.productId = orderItem.productId;
-      return item;
-    });
-    return details;
-  };
-  if (orderItems) {
-    const productDetails = cartProducts(orderItems);
-    dispatch(setCartProducts(productDetails));
-  } else {
-    dispatch(setCartProducts([]));
-  }
-};
