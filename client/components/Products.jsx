@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import '../stylesheets/products.scss';
 
+
 const propTypes = {
   products: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.number.isRequired,
@@ -18,6 +19,7 @@ const propTypes = {
   })).isRequired,
   getSingleProd: PropTypes.func.isRequired,
 };
+
 
 const Products = ({ products, getSingleProd }) => (
   <div className="products-grid">

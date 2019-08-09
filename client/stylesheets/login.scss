@@ -1,0 +1,49 @@
+@import './index.scss';
+
+.buttondiv {
+  padding-left: 75px;
+}
+.button {
+  // display: inline-block;
+  width: 250px;
+  background-color: rgb(151, 174, 250);
+  align-content: space-around;
+  margin: 30px auto;
+  position: center;
+  height: 50px;
+  font-size: 25px;
+}
+
+.grad {
+  background-color: rgb(189, 183, 183);
+  padding-top: 20px;
+}
+
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  // background-color: red;
+}
+
+.input-label {
+  padding-left: 75px;
+  display: flex;
+  padding-top: 20px;
+}
+.input-box {
+  padding-left: 75px;
+  height: 25px;
+}
+
+.h2 {
+  padding-left: 75px;
+}
+
+.input {
+  border: 2px solid #000;
+  width: 500px;
+  padding-top: 3px;
+  height: 30px;
+  font-size: 25px;
+}

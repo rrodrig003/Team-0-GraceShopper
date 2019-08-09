@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import '../stylesheets/login.scss';
 
 const propTypes = {
   handleClick: PropTypes.func.isRequired,
@@ -8,7 +9,9 @@ const propTypes = {
 
 const Button = ({ handleClick, name }) => (
   <div>
-    <button type="button" onClick={handleClick}>{name}</button>
+    <button className="button" type="button" onClick={handleClick}>
+      {name}
+    </button>
   </div>
 );
 
