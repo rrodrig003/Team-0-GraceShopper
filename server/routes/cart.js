@@ -17,27 +17,6 @@ router.get('/:id', async (req, res) => {
   }
 });
 
-// get route by UserId
-router.get('/user/:userId', async (req, res, next) => {
-  try {
-    const order = await Order.findOne({
-      where: {
-        userId: req.params.userId,
-        status: 'Cart',
-      },
-    });
-
-    const orders = await OrderItem.findAll({
-      where: {
-        orderId: order.id,
-      },
-    });
-    res.send(orders);
-  } catch (e) {
-    next(e);
-  }
-});
-
 router.post('/add', (req, res, next) => {
   const { orderId, productId, quantity } = req.body;
   OrderItem.create({

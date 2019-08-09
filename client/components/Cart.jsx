@@ -11,39 +11,42 @@ const propTypes = {
       description: PropTypes.string.isRequired,
       imageUrl: PropTypes.string.isRequired,
     }),
-  ).isRequired,
-  increaseQuantity: PropTypes.func.isRequired,
-  decreaseQuantity: PropTypes.func.isRequired,
-  removeItem: PropTypes.func.isRequired,
+  ),
+  handleUpdate: PropTypes.func.isRequired,
 };
 
 const Cart = ({
   cart,
-  increaseQuantity,
-  decreaseQuantity,
-  removeItem,
+  handleUpdate,
 }) => (
   <div>
-    {
-      cart.map(item => (
-        <div className="cart" key={item.id}>
+    { cart.length
+      ? (cart.map(item => (
+        <div className="cart" key={item.name}>
           <img src={item.imageUrl} alt={item.name} />
           <span className="item-name">{item.name}</span>
           <span className="item-quantity">{item.quantity}</span>
           <span className="item-price">{item.price}</span>
           <div className="item-actions">
-            <Button onClick={increaseQuantity} name="+" />
-            <Button onClick={decreaseQuantity} name="-" />
+            <Button handleClick={() => handleUpdate(item, 'increase')} name="+" />
+            <Button handleClick={() => handleUpdate(item, 'decrease')} name="-" />
           </div>
           <span className="remove-item">
-            <Button onClick={removeItem} name="x" />
+            <Button handleClick={() => handleUpdate(item, 'remove')} name="x" />
           </span>
         </div>
-      ))
+      ))) : (<div> Empty Cart </div>)
     }
+    <div>
+      <Button handleClick={() => {}} name="Checkout" />
+    </div>
   </div>
 );
 
 Cart.propTypes = propTypes;
+
+Cart.defaultProps = {
+  cart: [],
+};
 
 export default Cart;

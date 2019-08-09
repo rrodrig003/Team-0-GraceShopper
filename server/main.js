@@ -1,8 +1,8 @@
 const env = require('dotenv');
 const cookieParser = require('cookie-parser');
+const morgan = require('morgan');
 const express = require('express');
 const path = require('path');
-const morgan = require('morgan');
 const router = require('./routes');
 const sessionMiddleware = require('./middleware');
 

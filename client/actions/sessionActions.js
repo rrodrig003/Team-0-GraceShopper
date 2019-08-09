@@ -25,7 +25,7 @@ export const registerSuccess = () => ({ type: types.SUCCESSFUL_REGISTER });
 
 export const registerFailed = error => ({ type: types.FAILED_REGISTER, error });
 
-export const getCart = cartItems => ({ type: types.GET_CART, cartItems });
+export const getCart = cart => ({ type: types.GET_CART, cart });
 
 export const registrationInput = (field, value) => (
   { type: types.REGISTRATION_INPUT, field, value });
@@ -45,8 +45,7 @@ export const loginAttempt = history => async (dispatch, getState) => {
       sessionId: session.id,
     });
     dispatch(updateSession(sessionUser.data));
-    const cart = await axios.get(`/api/cart/${user.id}`);
-    console.log('cart data', cart.data);
+    const cart = await axios.get(`/api/cart/${user.data.id}`);
     dispatch(getCart(cart.data));
     history.push('/');
   } catch (e) {
@@ -74,13 +73,12 @@ export const sessionOnLoad = () => async (dispatch) => {
       dispatch(activeSession());
       const user = await axios.get(`/api/auth/user/${data.userId}`);
       dispatch(setUser(user.data));
-      const userCart = await axios.get(`/api/cart/${user.id}`);
+      const userCart = await axios.get(`/api/cart/${user.data.id}`);
       dispatch(getCart(userCart.data));
+    } else {
+      const sessionCart = await axios.get(`/api/cart/${data.id}`);
+      if (sessionCart.data) dispatch(getCart(sessionCart.data));
     }
-    console.log('data id', data.id)
-    const sessionCart = await axios.get(`/api/cart/${data.id}`);
-    console.log('returned from route', sessionCart.data);
-    dispatch(getCart(sessionCart.data));
   } catch (e) {
     console.error(e);
   }
