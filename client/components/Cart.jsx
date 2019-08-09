@@ -25,6 +25,7 @@ const propTypes = {
 
 class Cart extends Component {
   componentDidMount() {
+    console.log('##### CDM PROPS ####', this.props);
     const {
       signedIn, userId, sessionId, getCartByUser, getCartBySession,
     } = this.props;
@@ -36,13 +37,14 @@ class Cart extends Component {
   }
 
   render() {
+    console.log('##### PROPS ####', this.props);
     const { cartItems, products } = this.props;
     return (
       <div className="">
         <h1>Shopping Cart</h1>
         {
           // eslint-disable-next-line arrow-parens
-          cartItems.map(item => {
+          '' && cartItems.map(item => {
             const product = products.find(elem => elem.productId === item.productId);
             return (
               <div key={item.orderId}>

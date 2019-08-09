@@ -5,17 +5,23 @@ import { fetchCartBySession, fetchCartByUser } from '../actions/cartActions';
 
 const Container = props => <Cart {...props} />;
 
-const mapStateToProps = state => ({
-  signedIn: state.authenticate.signedIn,
-  userId: state.authenticate.user.userId,
-  sessionId: state.authenticate.session.sessionId,
-  products: state.products.allProducts,
-});
+const mapStateToProps = (state) => {
+  const { authenticate, products, cart } = state;
+  return {
+    signedIn: authenticate.auth.signedIn,
+    userId: authenticate.auth.user.id,
+    sessionId: authenticate.auth.session.id,
+    products: products.allProducts,
+    cartItems: cart,
+  };
+};
 
-const mapDispatchToProps = dispatch => ({
-  getCartByUser: id => dispatch(fetchCartByUser(id)),
-  getCartBySession: id => dispatch(fetchCartBySession(id)),
-});
+const mapDispatchToProps = (dispatch) => {
+  return {
+    getCartByUser: id => dispatch(fetchCartByUser(id)),
+    getCartBySession: id => dispatch(fetchCartBySession(id)),
+  };
+};
 
 const connectComponent = connect(
   mapStateToProps,
