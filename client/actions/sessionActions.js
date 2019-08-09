@@ -46,6 +46,7 @@ export const loginAttempt = history => async (dispatch, getState) => {
     });
     dispatch(updateSession(sessionUser.data));
     const cart = await axios.get(`/api/cart/${user.id}`);
+    console.log('cart data', cart.data);
     dispatch(getCart(cart.data));
     history.push('/');
   } catch (e) {
@@ -76,8 +77,10 @@ export const sessionOnLoad = () => async (dispatch) => {
       const userCart = await axios.get(`/api/cart/${user.id}`);
       dispatch(getCart(userCart.data));
     }
+    console.log('data id', data.id)
     const sessionCart = await axios.get(`/api/cart/${data.id}`);
-    dispatch(getCart(sessionCart));
+    console.log('returned from route', sessionCart.data);
+    dispatch(getCart(sessionCart.data));
   } catch (e) {
     console.error(e);
   }

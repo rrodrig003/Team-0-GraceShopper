@@ -7,7 +7,6 @@ module.exports = router;
 
 router.post('/login', (req, res) => {
   const { username, password } = req.body;
-
   if (!username || !password) {
     res.sendStatus(401);
     return;
@@ -87,7 +86,7 @@ router.get('/session', (req, res, next) => {
       })
       .catch(next);
   } else {
-    const SID = req.headers.cookie.split('=')[1];
+    const { SID } = req.cookies;
     Session.findOne({
       where: {
         SID,
