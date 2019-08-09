@@ -85,10 +85,6 @@ router.get('/session', (req, res, next) => {
       })
       .catch(next);
   } else {
-<<<<<<< HEAD
-    const { SID } = req.cookies;
-=======
->>>>>>> d176899... fix session mw
     Session.findOne({
       where: {
         SID: req.SID,
