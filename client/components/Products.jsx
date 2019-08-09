@@ -1,10 +1,9 @@
+/* eslint-disable jsx-a11y/click-events-have-key-events */
 import React from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import '../stylesheets/products.scss';
 
-// TODO resolve linting errors
-// Include prop types
 const propTypes = {
   products: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.number.isRequired,
@@ -28,8 +27,7 @@ const Products = ({ products, getSingleProd }) => (
           className="product"
           role="button"
           tabIndex={0}
-          onClick={() => {}}
-          onKeyDown={getSingleProd(product.id)}
+          onClick={() => getSingleProd(product.id)}
         >
           <img
             src={product.imageUrl}
