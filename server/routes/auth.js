@@ -12,7 +12,6 @@ router.post('/login', (req, res) => {
     res.sendStatus(401);
     return;
   }
-
   User.findOne({
     where: {
       username,
@@ -24,8 +23,9 @@ router.post('/login', (req, res) => {
     })
     .then(async (user) => {
       const match = await User.validate(password, user);
-      if (match === true) res.json(user);
-      else {
+      if (match === true) {
+        res.cookie('loggedIn', 'true', { maxAge: 2629800000 }).json(user);
+      } else {
         throw new Error('Invalid Username/Password');
       }
     })
@@ -48,6 +48,7 @@ router.put('/session/:userId', (req, res, next) => {
 router.post('/logout', (req, res) => {
   if (!req.loggedIn) res.sendStatus(400);
   res.clearCookie('SID');
+  res.clearCookie('loggedIn');
   res.sendStatus(200);
 });
 
@@ -82,15 +83,13 @@ router.get('/session', (req, res, next) => {
       SID: session,
     })
       .then((result) => {
-        res.cookie('SID', session, { maxAge: 2629800000 });
-        res.json(result);
+        res.cookie('SID', session, { maxAge: 2629800000 }).json(result);
       })
       .catch(next);
   } else {
-    const SID = req.headers.cookie.split('=')[1];
     Session.findOne({
       where: {
-        SID,
+        SID: req.SID,
       },
     })
       .then(session => res.json(session))
