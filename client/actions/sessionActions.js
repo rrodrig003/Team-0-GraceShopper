@@ -25,6 +25,8 @@ export const registerSuccess = () => ({ type: types.SUCCESSFUL_REGISTER });
 
 export const registerFailed = error => ({ type: types.FAILED_REGISTER, error });
 
+export const getCart = cartItems => ({ type: types.GET_CART, cartItems });
+
 export const registrationInput = (field, value) => (
   { type: types.REGISTRATION_INPUT, field, value });
 
@@ -43,6 +45,8 @@ export const loginAttempt = history => async (dispatch, getState) => {
       sessionId: session.id,
     });
     dispatch(updateSession(sessionUser.data));
+    const cart = await axios.get(`/api/cart/${user.id}`);
+    dispatch(getCart(cart.data));
     history.push('/');
   } catch (e) {
     dispatch(loginFailed());
@@ -69,7 +73,11 @@ export const sessionOnLoad = () => async (dispatch) => {
       dispatch(activeSession());
       const user = await axios.get(`/api/auth/user/${data.userId}`);
       dispatch(setUser(user.data));
+      const userCart = await axios.get(`/api/cart/${user.id}`);
+      dispatch(getCart(userCart.data));
     }
+    const sessionCart = await axios.get(`/api/cart/${data.id}`);
+    dispatch(getCart(sessionCart));
   } catch (e) {
     console.error(e);
   }

@@ -1,64 +1,48 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
+import Button from './Button';
 
 const propTypes = {
-  cartItems: PropTypes.arrayOf(PropTypes.shape({
-    quantity: PropTypes.number.isRequired,
-    orderId: PropTypes.number.isRequired,
-    productId: PropTypes.number.isRequired,
-  })).isRequired,
-  products: PropTypes.arrayOf(PropTypes.shape({
-    productId: PropTypes.number.isRequired,
-    name: PropTypes.number.isRequired,
-    price: PropTypes.number.isRequired,
-    description: PropTypes.string.isRequired,
-    stock: PropTypes.number.isRequired,
-    imageUrl: PropTypes.string,
-    categoryId: PropTypes.number,
-  })).isRequired,
-  signedIn: PropTypes.bool.isRequired,
-  userId: PropTypes.number.isRequired,
-  sessionId: PropTypes.number.isRequired,
-  getCartByUser: PropTypes.func.isRequired,
-  getCartBySession: PropTypes.func.isRequired,
+  cart: PropTypes.arrayOf(
+    PropTypes.shape({
+      quantity: PropTypes.number.isRequired,
+      name: PropTypes.string.isRequired,
+      price: PropTypes.number.isRequired,
+      description: PropTypes.string.isRequired,
+      imageUrl: PropTypes.string.isRequired,
+    }),
+  ).isRequired,
+  increaseQuantity: PropTypes.func.isRequired,
+  decreaseQuantity: PropTypes.func.isRequired,
+  removeItem: PropTypes.func.isRequired,
 };
 
-class Cart extends Component {
-  componentDidMount() {
-    const {
-      signedIn, userId, sessionId, getCartByUser, getCartBySession,
-    } = this.props;
-    if (signedIn) {
-      getCartByUser(userId);
-    } else {
-      getCartBySession(sessionId);
+const Cart = ({
+  cart,
+  increaseQuantity,
+  decreaseQuantity,
+  removeItem,
+}) => (
+  <div>
+    {
+      cart.map(item => (
+        <div className="cart" key={item.id}>
+          <img src={item.imageUrl} alt={item.name} />
+          <span className="item-name">{item.name}</span>
+          <span className="item-quantity">{item.quantity}</span>
+          <span className="item-price">{item.price}</span>
+          <div className="item-actions">
+            <Button onClick={increaseQuantity} name="+" />
+            <Button onClick={decreaseQuantity} name="-" />
+          </div>
+          <span className="remove-item">
+            <Button onClick={removeItem} name="x" />
+          </span>
+        </div>
+      ))
     }
-  }
-
-  render() {
-    const { cartItems, products } = this.props;
-    return (
-      <div className="">
-        <h1>Shopping Cart</h1>
-        {
-          // eslint-disable-next-line arrow-parens
-          cartItems.map(item => {
-            const product = products.find(elem => elem.productId === item.productId);
-            return (
-              <div key={item.orderId}>
-                <img src={product.imageUrl} alt="" />
-                <span>{product.name}</span>
-                <span>{item.quantity}</span>
-                <span>{product.price}</span>
-                <span>{product.price * item.quantity}</span>
-              </div>
-            );
-          })
-        }
-      </div>
-    );
-  }
-}
+  </div>
+);
 
 Cart.propTypes = propTypes;
 

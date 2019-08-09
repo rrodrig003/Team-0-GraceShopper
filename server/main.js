@@ -2,6 +2,7 @@ const env = require('dotenv');
 const cookieParser = require('cookie-parser');
 const express = require('express');
 const path = require('path');
+const morgan = require('morgan');
 const router = require('./routes');
 const sessionMiddleware = require('./middleware');
 
@@ -11,8 +12,8 @@ if (process.env.NODE_ENV === 'development') {
 
 const app = express();
 app.use(express.static(path.join(__dirname, './public')));
-
 app.use(express.json());
+app.use(morgan('combined'));
 app.use(cookieParser());
 app.use(sessionMiddleware);
 app.use('/api', router);

@@ -2,36 +2,43 @@ const router = require('express').Router();
 const Order = require('../database/models/order.js');
 const OrderItem = require('../database/models/orderItem.js');
 
-router.get('/session/:sessionId', async (req, res, next) => {
-  try {
-    const order = await Order.findOne({
+router.get('/cart/:id', (req, res, next) => {
+  const { loggedIn } = req.cookies;
+  if (loggedIn === 'true') {
+    Order.findOne({
       where: {
-        sessionId: req.params.sessionId,
+        userId: req.params.id,
       },
-    });
-    const orders = await OrderItem.findAll({
+    })
+      .then((order) => {
+        OrderItem.findAll({
+          where: {
+            orderId: order.id,
+          },
+        })
+          .then(cart => res.json(cart))
+          .catch(next);
+      })
+      .catch(next);
+  } else {
+    Order.findOne({
       where: {
-        orderId: order.id,
+        sessionId: req.params.id,
       },
-    });
-    res.json(orders);
-  } catch (e) {
-    next(e);
+    })
+      .then((order) => {
+        OrderItem.findAll({
+          where: {
+            orderId: order.id,
+          },
+        })
+          .then(cart => res.json(cart))
+          .catch(next);
+      })
+      .catch(next);
   }
 });
 
-router.get('/order/:orderId', async (req, res, next) => {
-  try {
-    const order = await OrderItem.findAll({
-      where: {
-        orderId: req.params.orderId,
-      },
-    });
-    res.send(order);
-  } catch (e) {
-    next(e);
-  }
-});
 
 // get route by UserId
 router.get('/user/:userId', async (req, res, next) => {
