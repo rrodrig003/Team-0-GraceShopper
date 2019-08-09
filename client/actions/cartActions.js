@@ -9,15 +9,12 @@ export const addItem = item => ({ type: types.ADD_TO_CART, item });
 
 export const removeItem = item => ({ type: types.REMOVE_CART_ITEM, item });
 
-export const failToUpdate = () => ({ type: types.FAIL_TO_UPDATE_CART });
-
 export const addItemToCart = (product, orderId) => async (dispatch) => {
   try {
     const newCartItem = await axios.post('/api/cart', { productId: product.id, orderId });
     dispatch(addItem(newCartItem(newCartItem)));
   } catch (e) {
     console.error(e);
-    dispatch(failToUpdate());
   }
 };
 
@@ -27,7 +24,6 @@ export const removeItemFromCart = cartItem => async (dispatch) => {
     dispatch(removeItem(cartItem));
   } catch (e) {
     console.error(e);
-    dispatch(failToUpdate());
   }
 };
 
@@ -50,7 +46,6 @@ export const updateCartItem = (cartItem, updateType) => async (dispatch) => {
     }
   } catch (e) {
     console.error(e);
-    dispatch(failToUpdate());
   }
 };
 
