@@ -16,12 +16,10 @@ const mapStateToProps = (state) => {
   };
 };
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    getCartByUser: id => dispatch(fetchCartByUser(id)),
-    getCartBySession: id => dispatch(fetchCartBySession(id)),
-  };
-};
+const mapDispatchToProps = dispatch => ({
+  getCartByUser: id => dispatch(fetchCartByUser(id)),
+  getCartBySession: id => dispatch(fetchCartBySession(id)),
+});
 
 const connectComponent = connect(
   mapStateToProps,

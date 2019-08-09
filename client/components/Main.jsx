@@ -6,7 +6,7 @@ import Navbar from '../containers/NavbarContainer';
 import Home from './Home';
 import Products from '../containers/ProductsContainer';
 import Login from '../containers/AuthContainer';
-import Cart from './Cart';
+import Cart from '../containers/CartContainer';
 import SingleProduct from '../containers/SingleProductContainer';
 import '../stylesheets/index.scss';
 import '../stylesheets/header.scss';

@@ -8,16 +8,17 @@ const propTypes = {
     productId: PropTypes.number.isRequired,
   })).isRequired,
   products: PropTypes.arrayOf(PropTypes.shape({
-    productId: PropTypes.number.isRequired,
-    name: PropTypes.number.isRequired,
-    price: PropTypes.number.isRequired,
+    id: PropTypes.number.isRequired,
+    name: PropTypes.string.isRequired,
+    price: PropTypes.string.isRequired,
     description: PropTypes.string.isRequired,
     stock: PropTypes.number.isRequired,
     imageUrl: PropTypes.string,
     categoryId: PropTypes.number,
   })).isRequired,
   signedIn: PropTypes.bool.isRequired,
-  userId: PropTypes.number.isRequired,
+  // eslint-disable-next-line react/require-default-props
+  userId: PropTypes.number,
   sessionId: PropTypes.number.isRequired,
   getCartByUser: PropTypes.func.isRequired,
   getCartBySession: PropTypes.func.isRequired,
@@ -25,7 +26,6 @@ const propTypes = {
 
 class Cart extends Component {
   componentDidMount() {
-    console.log('##### CDM PROPS ####', this.props);
     const {
       signedIn, userId, sessionId, getCartByUser, getCartBySession,
     } = this.props;
@@ -37,7 +37,6 @@ class Cart extends Component {
   }
 
   render() {
-    console.log('##### PROPS ####', this.props);
     const { cartItems, products } = this.props;
     return (
       <div className="">
@@ -45,7 +44,7 @@ class Cart extends Component {
         {
           // eslint-disable-next-line arrow-parens
           '' && cartItems.map(item => {
-            const product = products.find(elem => elem.productId === item.productId);
+            const product = products.find(elem => elem.id === item.productId);
             return (
               <div key={item.orderId}>
                 <img src={product.imageUrl} alt="" />
