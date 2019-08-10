@@ -2,6 +2,8 @@
 
 const router = require('express').Router();
 const Order = require('../database/models/order');
+const OrderItem = require('../database/models/orderItem');
+const Product = require('../database/models/product');
 
 module.exports = router;
 
@@ -29,5 +31,21 @@ router.post('/create', (req, res) => {
           error: 'Internal Server Error',
         });
       });
+  }
+});
+
+router.get('/:id', async (req, res, next) => {
+  try {
+    const orderItems = await OrderItem.findAll({
+      where: { orderId: req.params.id },
+    });
+    const getProductIds = orders => orders.map(order => order.productId);
+
+    const products = await Product.findAll({
+      where: { id: getProductIds(orderItems) },
+    });
+    res.json({ products, orderItems });
+  } catch (e) {
+    next(e);
   }
 });
