@@ -10,6 +10,7 @@ const mapStateToProps = (state) => {
   return {
     user: authenticate.auth.user,
     signedIn: authenticate.auth.signedIn,
+    isAdmin: authenticate.auth.user.isAdmin,
   };
 };
 

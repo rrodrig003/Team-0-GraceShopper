@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 const propTypes = {
   signedIn: PropTypes.bool.isRequired,
   handleLogout: PropTypes.func.isRequired,
+  isAdmin: PropTypes.bool.isRequired,
 };
 
 const display = (signin) => {
@@ -12,46 +13,55 @@ const display = (signin) => {
     return (
       <li className="nav-link">
         <Link className="link" to="/">
-          Profile
+					Profile
         </Link>
       </li>
     );
   }
 };
 
-const Navbar = ({ signedIn, handleLogout }) => (
+const Navbar = ({ signedIn, handleLogout, isAdmin }) => (
   <nav className="nav">
     <ul>
       <li className="nav-link">
         <Link className="link" to="/">
-          Home
+					Home
         </Link>
       </li>
       <li className="nav-link">
         <Link className="link" to="/products">
-          Products
+					Products
         </Link>
       </li>
       <li className="nav-link">
         <Link className="link" to="/cart">
-          Cart
+					Cart
         </Link>
       </li>
 
       {signedIn ? (
         <li className="nav-link">
           <Link className="link" to="/" onClick={handleLogout}>
-            Logout
+						Logout
           </Link>
         </li>
       ) : (
         <li className="nav-link">
           <Link className="link" to="/login">
-            Login
+						Login
           </Link>
         </li>
       )}
       {display(signedIn)}
+      {signedIn && isAdmin ? (
+        <li className="nav-link">
+          <Link className="link" to="/admin">
+						Admin
+          </Link>
+        </li>
+      ) : (
+			  ''
+      )}
     </ul>
   </nav>
 );
