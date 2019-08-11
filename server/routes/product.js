@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 const router = require('express').Router();
 const Product = require('../../server/database/models/product.js');
 const Category = require('../database/models/category.js');
@@ -67,14 +68,12 @@ router.put('/assigncategory', async (req, res, next) => {
         name: productName,
       },
     });
-    
     const updatedProduct = await product.update(
       { categoryId: category.id },
     );
 
     res.json({ updatedProduct });
-  } 
-  catch (e) {
+  } catch (e) {
     console.log('error assinging category to product in prod put route', e);
     next(e);
   }

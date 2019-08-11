@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import axios from 'axios';
 import * as types from './actionTypes';
 
@@ -23,7 +24,7 @@ export const fetchCategories = () => async (dispatch) => {
   }
 };
 
-export const postNewCategory = (category) => async (dispatch) => {
+export const postNewCategory = category => async (dispatch) => {
   try {
     const { data } = await axios.post('/api/categories/create', category);
     dispatch(createCategory(data));
