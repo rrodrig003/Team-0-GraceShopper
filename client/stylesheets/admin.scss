@@ -1,0 +1,38 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto+Condensed:400,700,300');
+@import "./index.scss";
+
+.admin-grid {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-content: space-around;
+
+  .admin-links {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-content: space-around;
+
+    li {
+      padding: 10px;
+      text-decoration: none;
+      list-style: none;
+      color: color(secondary);
+      font-size: 72px;
+      
+          &:hover {
+            text-shadow: 2px 2px 4px #000000;
+        }
+  
+        .link {
+          color: color(primary);
+          outline: none;
+        }
+    }
+  }
+
+  .material-icons {
+    color: color(accent);
+    font-size: 72px;
+  }
+}
