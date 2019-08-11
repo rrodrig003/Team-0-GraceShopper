@@ -10,6 +10,7 @@ import { createMemoryHistory } from 'history';
 import Main from '../client/components/Main';
 import Home from '../client/components/Home';
 import Products from '../client/components/Products';
+import Cart from '../client/components/Cart';
 import store from '../client/store';
 
 
@@ -59,6 +60,19 @@ describe('React componnents', () => {
 
     it('renders elements based on what gets placed on the state', async () => {
       await expect(component.find('button')).to.have.length(1);
+    });
+  });
+  describe('Cart', () => {
+    beforeEach('Create <Cart />', async () => {
+      component = await mount(
+        <Provider store={store}>
+          <Cart handleUpdate={() => {}} />
+        </Provider>,
+      );
+    });
+
+    it('renders a cart component with a checkout button', async () => {
+      await expect(component.find('button')).to.have.lengthOf(1);
     });
   });
 });

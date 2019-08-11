@@ -7,7 +7,6 @@ module.exports = router;
 
 router.post('/login', (req, res) => {
   const { username, password } = req.body;
-
   if (!username || !password) {
     res.sendStatus(401);
     return;
@@ -23,9 +22,9 @@ router.post('/login', (req, res) => {
     })
     .then(async (user) => {
       const match = await User.validate(password, user);
-      if (match === true) {
-        res.cookie('loggedIn', 'true', { maxAge: 2629800000 }).json(user);
-      } else {
+
+      if (match === true) res.cookie('loggedIn', 'true', { maxAge: 2629800000 }).json(user);
+      else {
         throw new Error('Invalid Username/Password');
       }
     })

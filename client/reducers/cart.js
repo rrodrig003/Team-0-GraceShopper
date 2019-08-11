@@ -1,11 +1,16 @@
 import { GET_CART } from '../actions/actionTypes';
 
-const cartState = [];
+const initialCart = {
+  orderItems: [],
+};
 
-const cart = (state = cartState, action) => {
+const cart = (state = initialCart, action) => {
   switch (action.type) {
     case GET_CART:
-      return [...state, ...action.cartItems];
+      return {
+        ...state,
+        orderItems: [...state.orderItems, ...action.cart],
+      };
     default:
       return state;
   }

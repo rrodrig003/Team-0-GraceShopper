@@ -85,14 +85,15 @@ describe('Routes', () => {
   });
 
   describe('Cart', () => {
-    it('/cart can get order items by order id', async () => {
+    it('/cart returns order for current SID', async () => {
       await Product.create(getMockProduct());
-      await Session.create({ SID: 'test' });
-      await Order.create({ sessionId: 1, userId: 1 });
+      const session = await Session.create({ SID: 'test' });
+      await Order.create({ sessionId: session.id, userId: 1 });
       await OrderItem.create({ productId: 1, orderId: 1 });
 
       const res = await agent
-        .get('/api/cart/session/1')
+        .get(`/api/cart/${session.id}`)
+        .set('Cookie', ['loggedIn=true'])
         .expect('Content-Type', /json/)
         .expect(200);
 
@@ -102,24 +103,23 @@ describe('Routes', () => {
 
   describe('Order', () => {
     it('/order will create an order for every new session', async () => {
-      const session = await Session.create({ SID: 'testOrder' });
       const res = await agent
         .post('/api/order/create')
-        .send({ sessionId: session.id, status: 'Cart' })
+        .send({ sessionId: 1 })
         .expect(201);
 
       expect(res.body.status).to.equal('Cart');
-      expect(res.body.sessionId).to.equal(session.id);
+      expect(res.body.sessionId).to.equal(1);
+      expect(res.body.userId).to.equal(null);
     });
 
     it('/order will not create a new order if session exists', async () => {
       const res = await agent
         .post('/api/order/create')
-        .send({ sessionId: 1, status: 'Cart' })
+        .send({ sessionId: 2, status: 'Cart' })
         .expect(200);
-
       expect(res.body.status).to.equal('Cart');
-      expect(res.body.sessionId).to.equal(1);
+      expect(res.body.id).to.equal(1);
     });
 
     it('/order should return 400 if invalid request', async () => {
