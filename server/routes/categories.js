@@ -23,4 +23,13 @@ router.get('/:id', (req, res, next) => {
     });
 });
 
+router.post('/create', (req, res, next) => {
+  Category.create(req.body)
+    .then(category => res.json(category))
+    .catch((e) => {
+      console.log('error in category.create', e);
+      next(e);
+    });
+});
+
 module.exports = router;

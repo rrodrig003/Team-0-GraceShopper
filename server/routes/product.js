@@ -1,5 +1,6 @@
 const router = require('express').Router();
 const Product = require('../../server/database/models/product.js');
+const Category = require('../database/models/category.js');
 
 // route to get all products from db
 router.get('/', (req, res, next) => {
@@ -50,6 +51,33 @@ router.delete('/:id', (req, res, next) => {
       console.log('error in product destroy route', e);
       next(e);
     });
+});
+
+router.put('/assigncategory', async (req, res, next) => {
+  const { categoryName, productName } = req.body;
+  try {
+    const category = await Category.findOne({
+      where: {
+        name: categoryName,
+      },
+    });
+
+    const product = await Product.findOne({
+      where: {
+        name: productName,
+      },
+    });
+    
+    const updatedProduct = await product.update(
+      { categoryId: category.id },
+    );
+
+    res.json({ updatedProduct });
+  } 
+  catch (e) {
+    console.log('error assinging category to product in prod put route', e);
+    next(e);
+  }
 });
 
 module.exports = router;
