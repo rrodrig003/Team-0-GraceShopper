@@ -14,11 +14,9 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = dispatch => ({
-  getProducts() {
-    dispatch(fetchProducts());
-  },
   onLoad() {
     dispatch(sessionOnLoad());
+    dispatch(fetchProducts());
   },
 });
 

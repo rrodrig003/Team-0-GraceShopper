@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import '../stylesheets/singleProduct.scss';
 
-// TODO: Resolve eslint errors
 const propTypes = {
   product: PropTypes.shape({
     id: PropTypes.number.isRequired,

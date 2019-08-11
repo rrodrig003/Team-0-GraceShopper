@@ -1,27 +1,26 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import Cart from '../components/Cart';
-import { fetchCartBySession, fetchCartByUser } from '../actions/cartActions';
+import { getCartProducts } from '../selector';
+import { updateCartItem, removeItemFromCart } from '../actions/cartActions';
 
 const Container = props => <Cart {...props} />;
 
-const mapStateToProps = state => ({
-  signedIn: state.authenticate.signedIn,
-  userId: state.authenticate.user.userId,
-  sessionId: state.authenticate.session.sessionId,
-  products: state.products.allProducts,
-});
+const mapStateToProps = state => ({ cart: getCartProducts(state) });
 
 const mapDispatchToProps = dispatch => ({
-  getCartByUser: id => dispatch(fetchCartByUser(id)),
-  getCartBySession: id => dispatch(fetchCartBySession(id)),
+  handleUpdate(cartItem, updateType) {
+    switch (updateType) {
+      case 'increase':
+        dispatch(updateCartItem(cartItem, 'increase'));
+        break;
+      case 'decrease':
+        dispatch(updateCartItem(cartItem, 'decrease'));
+        break;
+      default:
+        dispatch(removeItemFromCart(cartItem));
+    }
+  },
 });
 
-const connectComponent = connect(
-  mapStateToProps,
-  mapDispatchToProps,
-);
-
-const connectedCartContainer = connectComponent(Container);
-
-export default connectedCartContainer;
+export default connect(mapStateToProps, mapDispatchToProps)(Container);
