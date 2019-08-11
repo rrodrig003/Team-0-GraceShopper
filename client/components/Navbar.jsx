@@ -17,6 +17,7 @@ const display = (signin) => {
       </li>
     );
   }
+  return '';
 };
 
 const Navbar = ({ signedIn, handleLogout }) => (
