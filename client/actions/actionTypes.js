@@ -23,3 +23,5 @@ export const FETCH_USER = 'FETCH_USER';
 export const REMOVE_CART_ITEM = 'REMOVE_CART_ITEM';
 export const ADD_TO_CART = 'ADD_TO_CART';
 export const SET_CART_PRODUCTS = 'SET_CART_PRODUCTS';
+export const CREATE_CATEGORY = 'CREATE_CATEGORY';
+export const ASSIGN_CAT_TO_PROD = 'ASSIGN_CAT_TO_PROD';

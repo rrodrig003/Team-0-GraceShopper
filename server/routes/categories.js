@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 const router = require('express').Router();
 const Category = require('../database/models/category.js');
 
@@ -19,6 +20,15 @@ router.get('/:id', (req, res, next) => {
     })
     .catch((e) => {
       console.error(e);
+      next(e);
+    });
+});
+
+router.post('/create', (req, res, next) => {
+  Category.create(req.body)
+    .then(category => res.json(category))
+    .catch((e) => {
+      console.log('error in category.create', e);
       next(e);
     });
 });
