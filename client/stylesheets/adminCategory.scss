@@ -1,0 +1,14 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto+Condensed:400,700,300');
+@import "./index.scss";
+
+.admin-cat-grid {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-content: space-around;
+  color: color(secondary);
+
+  button:hover {
+    text-shadow: 2px 2px 4px #000000;
+  }
+}
