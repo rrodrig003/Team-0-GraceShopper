@@ -8,6 +8,7 @@ import Products from '../containers/ProductsContainer';
 import Login from '../containers/AuthContainer';
 import Cart from '../containers/CartContainer';
 import SingleProduct from '../containers/SingleProductContainer';
+import AdminCategory from '../containers/AdminCategoryContainer';
 import '../stylesheets/index.scss';
 import '../stylesheets/header.scss';
 
@@ -34,6 +35,7 @@ export default class Main extends Component {
             <Route exact path="/products" component={Products} />
             <Route exact path="/login" component={Login} />
             <Route exact path="/cart" component={Cart} />
+            <Route exact path="/admin/categories" component={AdminCategory} />
             <Route path="/products/:productId" component={SingleProduct} />
             <Redirect to="/" />
           </Switch>
